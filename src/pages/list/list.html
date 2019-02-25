@@ -10,7 +10,6 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      hellllllooooo {{bench}}
         <ion-card-header text-center>One Rep Max</ion-card-header>
             <form [formGroup]="cycle" (ngSubmit)="setORM()">
               <ion-row *ngFor="let exercise of exercises; let i = index" no-padding>
