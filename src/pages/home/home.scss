@@ -1,3 +1,18 @@
 page-home {
-
+    ion-content{
+    }
+    .top-card{
+        text-align: center;
+        display: flex;
+        width: 50% !important;
+        flex-direction: column;
+        margin-left: 25%;
+        margin-top: 0px;
+    }
+    .exercise-one{
+        text-align: center;
+    }
+    .exercise-two{
+        text-align: center;
+    }
 }
