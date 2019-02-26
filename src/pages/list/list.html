@@ -40,15 +40,16 @@
         <ion-card-header text-center>Select Available Weights</ion-card-header>
           <ion-row>
             <ion-col *ngFor="let weight of lightWeights" text-center col-3>
-              <button ion-button block (click)="selectWeight">{{weight}}</button>
+              <button ion-button block (click)="selectWeight(weight)">{{weight}}</button>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col *ngFor="let weight of heavyWeights" text-center col-3>
-              <button ion-button block (click)="selectWeight">{{weight}}</button>
+              <button ion-button block (click)="selectWeight(weight)">{{weight}}</button>
             </ion-col>
           </ion-row>
-          <button ion-button full class="weightClearButton">Clear</button>
+          <button ion-button full class="weightClearButton" (click)="clearWeights()">Clear</button>
+          <button ion-button full (click)="getWeights()">Get Weights</button>
     </ion-card-content>
   </ion-card>
 </ion-content>

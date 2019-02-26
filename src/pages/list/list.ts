@@ -70,4 +70,22 @@ export class ListPage {
       console.log('ORM DeadLift', data); //@DEBUG
     });
   }
+
+  selectWeight(weight) {
+    this.storage.set('AW' + weight, weight).then((data)=>{
+      console.log('set stored weight', data); //@DEBUG
+    });
+  }
+
+  clearWeights() {
+    this.storage.remove('AW45').then((data)=>{
+      console.log('AW45 cleared', data); //@DEBUG
+    });
+  }
+
+  getWeights() {
+    this.storage.get('AW45').then((data)=>{
+      console.log('get stored weight', data); //@DEBUG
+    });
+  }
 }
