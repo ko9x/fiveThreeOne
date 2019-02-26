@@ -10,6 +10,8 @@ import { callLifecycleHooksChildrenFirst } from '@angular/core/src/view/provider
 })
 export class ListPage {
 
+  public lightWeights = ["1.2","2.5"," 5","10"]
+  public heavyWeights = ["25","35","45","100"]
   public bench = {name:'bench',weight:null};
   public squat = {name:'squat',weight:null};
   public shoulderPress = {name:'shoulderPress',weight:null};
