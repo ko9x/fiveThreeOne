@@ -10,11 +10,11 @@ import { callLifecycleHooksChildrenFirst } from '@angular/core/src/view/provider
 })
 export class ListPage {
 
-  public exercises = ["bench","squat","shoulderPress","deadLift"];
-  public bench = {};
-  public squat = {};
-  public shoulderPress = {};
-  public deadLift = {};
+  public bench = {name:'bench',weight:null};
+  public squat = {name:'squat',weight:null};
+  public shoulderPress = {name:'shoulderPress',weight:null};
+  public deadLift = {name:'deadLift',weight:null};
+  public exercises = [this.bench,this.squat,this.shoulderPress,this.deadLift];
   public cycle : FormGroup;
   public test = false;
 
@@ -27,38 +27,31 @@ export class ListPage {
       
 
       this.storage.get('ORMBench').then((data) =>{
-        this.cycle.value.bench = data;
+        this.bench.weight = data;
       });
       this.storage.get('ORMSquat').then((data) =>{
-        this.cycle.value.squat = data;
+        this.squat.weight = data;
       });
       this.storage.get('ORMShoulderPress').then((data) =>{
-        this.cycle.value.shoulderPress = data;
+        this.shoulderPress.weight = data;
       });
       this.storage.get('ORMDeadLift').then((data) =>{
-        this.cycle.value.deadLift = data;
+        this.deadLift.weight = data;
       });
-      
-
       this.cycle = this.formBuilder.group({
-        bench: ['',],
+        bench: [''],
         squat: [''],
         shoulderPress: [''],
         deadLift: ['']
       });
       
     }
-
-  testValue() {
-    this.test = !this.test;
-  }
   
   setORM() {
-    this.storage.set('ORMBench', this.cycle.value.bench)
-    this.storage.set('ORMSquat', this.cycle.value.squat)
-    this.storage.set('ORMShoulderPress', this.cycle.value.shoulderPress)
-    this.storage.set('ORMDeadLift', this.cycle.value.deadLift)
-    console.log('formData', this.cycle.value); //@DEBUG
+    this.storage.set('ORMBench', this.cycle.value.bench);
+    this.storage.set('ORMSquat', this.cycle.value.squat);
+    this.storage.set('ORMShoulderPress', this.cycle.value.shoulderPress);
+    this.storage.set('ORMDeadLift', this.cycle.value.deadLift);
   }
 
   showORM() {
