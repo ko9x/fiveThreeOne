@@ -28,30 +28,27 @@
                   <h2>{{exercise.weight}}</h2>
                 </ion-col>
             </ion-row>
-            <button ion-button type="submit">Submit</button>
-            <button ion-button type="button" (click)="showORM()">Show</button>
-            <button ion-button type="button" (click)="clearORM()">Clear</button>
-            <button ion-button type="button" (click)="testValue()">Test</button>
+            <div class="ORMButtons">
+                <button ion-button full type="submit">Submit</button>
+                <button ion-button full type="button" (click)="clearORM()">Clear</button>
+            </div>
           </form>
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-content>
-        <ion-row>
-          <ion-col *ngFor="let weight of lightWeights" text-center col-3>
-            <button ion-button block (click)="selectWeight">{{weight}}</button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col *ngFor="let weight of heavyWeights" text-center col-3>
-            <button ion-button block (click)="selectWeight">{{weight}}</button>
-          </ion-col>
-        </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-
+        <ion-card-header text-center>Select Available Weights</ion-card-header>
+          <ion-row>
+            <ion-col *ngFor="let weight of lightWeights" text-center col-3>
+              <button ion-button block (click)="selectWeight">{{weight}}</button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col *ngFor="let weight of heavyWeights" text-center col-3>
+              <button ion-button block (click)="selectWeight">{{weight}}</button>
+            </ion-col>
+          </ion-row>
+          <button ion-button full class="weightClearButton">Clear</button>
     </ion-card-content>
   </ion-card>
 </ion-content>
