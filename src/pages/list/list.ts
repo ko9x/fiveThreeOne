@@ -13,12 +13,21 @@ export class ListPage {
   public cycle : FormGroup;
   public bench = {name:'bench',weight:null};
   public squat = {name:'squat',weight:null};
-  public heavyWeights = ["25","35","45","100"]
-  public lightWeights = ["1.2","2.5"," 5","10"]
   public deadLift = {name:'deadLift',weight:null};
   public shoulderPress = {name:'shoulderPress',weight:null};
   public exercises = [this.bench,this.squat,this.shoulderPress,this.deadLift];
-  buttons = Array(10).fill(false); // e.g. 10 = size of items
+  public onePTwo = {name: '1.2', disabled: false}
+  public twoPFive = {name: '2.5', disabled: false}
+  public five = {name: '5', disabled: false}
+  public ten = {name: '10', disabled: false}
+  public twentyFive = {name: '25', disabled: false}
+  public thirtyFive = {name: '35', disabled: false}
+  public fourtyFive = {name: '45', disabled: false}
+  public oneHundred = {name: '100', disabled: false}
+  public lightWeights = [this.onePTwo, this.twoPFive, this.five, this.ten]
+  public heavyWeights = [this.twentyFive, this.thirtyFive, this.fourtyFive, this.oneHundred]
+  public upperButtons = Array(4).fill(false); // e.g. 10 = size of items
+  public lowerButtons = Array(4).fill(false); // e.g. 10 = size of items
 
   constructor(
     public navCtrl: NavController, 
@@ -40,6 +49,8 @@ export class ListPage {
       this.storage.get('ORMDeadLift').then((data) =>{
         this.deadLift.weight = data;
       });
+
+      this.storage.get('AW' + '1.2')
 
       this.cycle = this.formBuilder.group({
         bench: [''],
@@ -73,17 +84,22 @@ export class ListPage {
   }
 
   selectWeight(weight) {
-    this.storage.set('AW' + weight, weight).then((data)=>{
+    this.storage.set('AW' + weight, weight).then((data) => {
       console.log('set stored weight', data); //@DEBUG
+    });
+    this.storage.set('AW' + weight + 'disabled', 'true').then((data) => {
+      console.log('set weight disabled', data); //@DEBUG
     });
   }
 
   clearAllWeights() {
     this.heavyWeights.forEach((weight) => {
-      this.clearWeight(weight);
+      this.clearWeight(weight.name);
+      weight.disabled = false;
     });
     this.lightWeights.forEach((weight) => {
-      this.clearWeight(weight);
+      this.clearWeight(weight.name);
+      weight.disabled = false;
     });
   }
 
@@ -93,10 +109,10 @@ export class ListPage {
 
   getAllWeights() {
     this.heavyWeights.forEach((weight) => {
-      this.getWeight(weight);
+      this.getWeight(weight.name);
     });
     this.lightWeights.forEach((weight) => {
-      this.getWeight(weight);
+      this.getWeight(weight.name);
     });
   }
 
