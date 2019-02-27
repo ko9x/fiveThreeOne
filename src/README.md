@@ -3,8 +3,8 @@
 
 # What to do next
 * finish implementing the weight select portion
-    * I want the buttons to become disabled once the weight has been stored
-    * hitting the clear button will clear the stored weights and activate the buttons
+    * I want the buttons to become disabled once the weight has been stored and stay disabled when you return to the page
+    * hitting the clear button should clear the stored weights and activate the buttons
 
 #Done
 * figure out how to dispaly the locally stored One Rep Max values
