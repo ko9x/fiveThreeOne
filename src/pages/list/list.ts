@@ -18,6 +18,7 @@ export class ListPage {
   public deadLift = {name:'deadLift',weight:null};
   public shoulderPress = {name:'shoulderPress',weight:null};
   public exercises = [this.bench,this.squat,this.shoulderPress,this.deadLift];
+  buttons = Array(10).fill(false); // e.g. 10 = size of items
 
   constructor(
     public navCtrl: NavController, 
@@ -77,15 +78,31 @@ export class ListPage {
     });
   }
 
-  clearWeights() {
-    this.storage.remove('AW45').then((data)=>{
-      console.log('AW45 cleared', data); //@DEBUG
+  clearAllWeights() {
+    this.heavyWeights.forEach((weight) => {
+      this.clearWeight(weight);
+    });
+    this.lightWeights.forEach((weight) => {
+      this.clearWeight(weight);
     });
   }
 
-  getWeights() {
-    this.storage.get('AW45').then((data)=>{
-      console.log('get stored weight', data); //@DEBUG
+  clearWeight(weight) {
+    this.storage.remove('AW' + weight);
+  }
+
+  getAllWeights() {
+    this.heavyWeights.forEach((weight) => {
+      this.getWeight(weight);
+    });
+    this.lightWeights.forEach((weight) => {
+      this.getWeight(weight);
+    });
+  }
+
+  getWeight(weight) {
+    this.storage.get('AW' + weight).then((data) => {
+      console.log('weight', data); //@DEBUG
     });
   }
 }
