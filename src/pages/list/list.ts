@@ -16,16 +16,18 @@ export class ListPage {
   public deadLift = {name:'deadLift',weight:null};
   public shoulderPress = {name:'shoulderPress',weight:null};
   public exercises = [this.bench,this.squat,this.shoulderPress,this.deadLift];
-  public onePTwo = {name: '1.2', disabled: false}
-  public twoPFive = {name: '2.5', disabled: false}
-  public five = {name: '5', disabled: false}
-  public ten = {name: '10', disabled: false}
-  public twentyFive = {name: '25', disabled: false}
-  public thirtyFive = {name: '35', disabled: false}
-  public fourtyFive = {name: '45', disabled: false}
-  public oneHundred = {name: '100', disabled: false}
-  public lightWeights = [this.onePTwo, this.twoPFive, this.five, this.ten]
-  public heavyWeights = [this.twentyFive, this.thirtyFive, this.fourtyFive, this.oneHundred]
+  public OW1_2 = {name: '1.2', disabled: false};
+  public OW2_5 = {name: '2.5', disabled: false};
+  public OW5 = {name: '5', disabled: false};
+  public OW10 = {name: '10', disabled: false};
+  public OW25 = {name: '25', disabled: false};
+  public OW35 = {name: '35', disabled: false};
+  public OW45 = {name: '45', disabled: false};
+  public OW100 = {name: '100', disabled: false};
+  public lightWeightNames = ['1.2','2.5','5','10'];
+  public heavyWeightNames = ['25','35','45','100'];
+  public lightWeights = [this.OW1_2, this.OW2_5, this.OW5, this.OW10];
+  public heavyWeights = [this.OW25, this.OW35, this.OW45, this.OW100];
   public upperButtons = Array(4).fill(false); // e.g. 10 = size of items
   public lowerButtons = Array(4).fill(false); // e.g. 10 = size of items
 
@@ -50,7 +52,13 @@ export class ListPage {
         this.deadLift.weight = data;
       });
 
-      this.storage.get('AW' + '1.2')
+      this.storage.get('OW' + '1.2' + 'disabled').then((data) => {
+        if (data === 'true'){
+          this.OW1_2.disabled = true;
+        } else {
+          this.OW1_2.disabled = false;
+        };
+      });
 
       this.cycle = this.formBuilder.group({
         bench: [''],
@@ -60,6 +68,9 @@ export class ListPage {
       });
       
     }
+
+  // Exercise Section
+  // ORM stands for One Rep Max
   
   setORM() {
     this.storage.set('ORMBench', this.cycle.value.bench);
@@ -83,11 +94,15 @@ export class ListPage {
     });
   }
 
+  // Weight Section
+  // OW stands for Olympic Weight
+  // I might make another section for standard weight at some point 
+
   selectWeight(weight) {
-    this.storage.set('AW' + weight, weight).then((data) => {
+    this.storage.set('OW' + weight, weight).then((data) => {
       console.log('set stored weight', data); //@DEBUG
     });
-    this.storage.set('AW' + weight + 'disabled', 'true').then((data) => {
+    this.storage.set('OW' + weight + 'disabled', 'true').then((data) => {
       console.log('set weight disabled', data); //@DEBUG
     });
   }
@@ -104,7 +119,7 @@ export class ListPage {
   }
 
   clearWeight(weight) {
-    this.storage.remove('AW' + weight);
+    this.storage.remove('OW' + weight);
   }
 
   getAllWeights() {
@@ -117,7 +132,7 @@ export class ListPage {
   }
 
   getWeight(weight) {
-    this.storage.get('AW' + weight).then((data) => {
+    this.storage.get('OW' + weight).then((data) => {
       console.log('weight', data); //@DEBUG
     });
   }
