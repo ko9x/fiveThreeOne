@@ -52,11 +52,86 @@ export class ListPage {
         this.deadLift.weight = data;
       });
 
+      // Can this work? At the moment it takes too long and the page loads before it is done
+
+      // for (let name of this.lightWeightNames) {
+      //   console.log('name', name); //@DEBUG
+      //   this.storage.get('OW' + name + 'disabled').then((data) => {
+      //     console.log('data', data); //@DEBUG
+      //     if (data === 'true'){
+      //       this.lightWeights[0].disabled = true;
+      //       console.log('the thing', this.lightWeights[0]); //@DEBUG
+      //     } else {
+      //       this.lightWeights[0].disabled = false;
+      //     }
+      //   });
+      // };
+
+
+      // This is obviously too repetitive
+
       this.storage.get('OW' + '1.2' + 'disabled').then((data) => {
+        console.log('data', data); //@DEBUG
         if (data === 'true'){
           this.OW1_2.disabled = true;
         } else {
           this.OW1_2.disabled = false;
+        };
+      });
+      this.storage.get('OW' + '2.5' + 'disabled').then((data) => {
+        console.log('data', data); //@DEBUG
+        if (data === 'true'){
+          this.OW2_5.disabled = true;
+        } else {
+          this.OW2_5.disabled = false;
+        };
+      });
+      this.storage.get('OW' + '5' + 'disabled').then((data) => {
+        console.log('data', data); //@DEBUG
+        if (data === 'true'){
+          this.OW5.disabled = true;
+        } else {
+          this.OW5.disabled = false;
+        };
+      });
+      this.storage.get('OW' + '10' + 'disabled').then((data) => {
+        console.log('data', data); //@DEBUG
+        if (data === 'true'){
+          this.OW10.disabled = true;
+        } else {
+          this.OW10.disabled = false;
+        };
+      });
+      this.storage.get('OW' + '25' + 'disabled').then((data) => {
+        console.log('data', data); //@DEBUG
+        if (data === 'true'){
+          this.OW25.disabled = true;
+        } else {
+          this.OW25.disabled = false;
+        };
+      });
+      this.storage.get('OW' + '35' + 'disabled').then((data) => {
+        console.log('data', data); //@DEBUG
+        if (data === 'true'){
+          this.OW35.disabled = true;
+        } else {
+          this.OW35.disabled = false;
+        };
+      });
+      this.storage.get('OW' + '45' + 'disabled').then((data) => {
+        console.log('data', data); //@DEBUG
+        if (data === 'true'){
+          this.OW45.disabled = true;
+        } else {
+          this.OW45.disabled = false;
+        };
+      });
+      this.storage.get('OW' + '100' + 'disabled').then((data) => {
+        console.log('data', data); //@DEBUG
+        if (data === 'true'){
+          this.OW100.disabled = true;
+        } else {
+          this.OW100.disabled = false;
         };
       });
 
@@ -68,7 +143,10 @@ export class ListPage {
       });
       
     }
+  // constructor ends
 
+
+  
   // Exercise Section
   // ORM stands for One Rep Max
   
@@ -100,26 +178,27 @@ export class ListPage {
 
   selectWeight(weight) {
     this.storage.set('OW' + weight, weight).then((data) => {
-      console.log('set stored weight', data); //@DEBUG
     });
     this.storage.set('OW' + weight + 'disabled', 'true').then((data) => {
-      console.log('set weight disabled', data); //@DEBUG
     });
   }
 
   clearAllWeights() {
-    this.heavyWeights.forEach((weight) => {
-      this.clearWeight(weight.name);
-      weight.disabled = false;
-    });
     this.lightWeights.forEach((weight) => {
       this.clearWeight(weight.name);
-      weight.disabled = false;
+      this.enableWeight(weight.name);
+    });
+    this.heavyWeights.forEach((weight) => {
+      this.clearWeight(weight.name);
+      this.enableWeight(weight.name);
     });
   }
 
   clearWeight(weight) {
     this.storage.remove('OW' + weight);
+  }
+  enableWeight(weight) {
+    this.storage.remove('OW' + weight + 'disabled');
   }
 
   getAllWeights() {
@@ -133,7 +212,6 @@ export class ListPage {
 
   getWeight(weight) {
     this.storage.get('OW' + weight).then((data) => {
-      console.log('weight', data); //@DEBUG
     });
   }
 }
