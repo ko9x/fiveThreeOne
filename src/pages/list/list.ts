@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { callLifecycleHooksChildrenFirst } from '@angular/core/src/view/provider';
@@ -35,7 +35,8 @@ export class ListPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public storage: Storage,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public toastCtrl: ToastController
     ) { 
       
 
@@ -155,6 +156,13 @@ export class ListPage {
     this.storage.set('ORMSquat', this.cycle.value.squat);
     this.storage.set('ORMShoulderPress', this.cycle.value.shoulderPress);
     this.storage.set('ORMDeadLift', this.cycle.value.deadLift);
+    
+      const toast = this.toastCtrl.create({
+        message: 'Successfully saved One Rep Maxes',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
   }
 
   clearORM() {
