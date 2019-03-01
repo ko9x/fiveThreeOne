@@ -26,8 +26,8 @@ export class ListPage {
   public OW100 = {name: '100', disabled: false};
   public lightWeightNames = ['1.2','2.5','5','10'];
   public heavyWeightNames = ['25','35','45','100'];
-  public lightWeights = [this.OW1_2, this.OW2_5, this.OW5, this.OW10];
-  public heavyWeights = [this.OW25, this.OW35, this.OW45, this.OW100];
+  public lightWeights = [this.OW1_2,this.OW2_5,this.OW5,this.OW10];
+  public heavyWeights = [this.OW25,this.OW35,this.OW45,this.OW100];
   public upperButtons = Array(4).fill(false); // e.g. 10 = size of items
   public lowerButtons = Array(4).fill(false); // e.g. 10 = size of items
 
@@ -178,6 +178,14 @@ export class ListPage {
     this.storage.remove('ORMDeadLift').then((data) => {
       console.log('ORM DeadLift', data); //@DEBUG
     });
+
+     this.exercises = 
+     [
+      this.bench = {name:'bench',weight:null},
+      this.squat = {name:'squat',weight:null},
+      this.shoulderPress = {name:'shoulderPress',weight:null},
+      this.deadLift = {name:'deadLift',weight:null}
+     ];
   }
 
   // Weight Section
@@ -195,11 +203,27 @@ export class ListPage {
     this.lightWeights.forEach((weight) => {
       this.clearWeight(weight.name);
       this.enableWeight(weight.name);
+      
     });
     this.heavyWeights.forEach((weight) => {
       this.clearWeight(weight.name);
       this.enableWeight(weight.name);
     });
+
+    this.lightWeights = 
+        [
+          this.OW1_2 = {name: '1.2', disabled: false}, 
+          this.OW2_5 = {name: '2.5', disabled: false}, 
+          this.OW5 = {name: '5', disabled: false}, 
+          this.OW10 = {name: '10', disabled: false}
+        ];
+    this.heavyWeights = 
+        [
+          this.OW25 = {name: '25', disabled: false}, 
+          this.OW35 = {name: '35', disabled: false}, 
+          this.OW45 = {name: '45', disabled: false}, 
+          this.OW100 = {name: '100', disabled: false}
+        ];
   }
 
   clearWeight(weight) {
