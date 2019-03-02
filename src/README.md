@@ -2,7 +2,7 @@
 * Make a Commit after every step! 
 
 # What to do next
-* Start work on the home page
+* Continue work on the home page
 
 
 #Done
