@@ -8,9 +8,10 @@
 </ion-header>
 
 <ion-content padding>
+  {{days}}
     <ion-card class="top-card">
       <ion-card-content center>
-        <h1>Week 2</h1> <h2>Monday</h2> <h3>2/28/19</h3>
+        <h1>Week 2</h1> <h2>Monday</h2>
       </ion-card-content>
     </ion-card>
     <ion-card>
@@ -69,4 +70,5 @@
         </ion-row>
       </ion-card-content>
     </ion-card>
+    <button ion-button (click)="runIt()">run it</button>
 </ion-content>
