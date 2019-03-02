@@ -18,22 +18,22 @@ export class HomePage {
   public days: string;
   public exercises = ["Bench","Squat","ShoulderPress","DeadLift"];
   public cycle = [{
-                    week1: [
-                      {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
-                      {set2: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
-                      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
-                    ],
-                    week2: [
-                      {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
-                      {set2: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
-                      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
-                    ],
-                    week3: [
-                      {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
-                      {set2: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
-                      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
-                    ]
-                  }];
+    week1: [
+      {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set2: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
+    ],
+    week2: [
+      {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set2: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
+    ],
+    week3: [
+      {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set2: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
+    ]
+  }];
 
   constructor(public navCtrl: NavController, public storage: Storage) {
     let currentDate = new Date();
@@ -58,9 +58,10 @@ export class HomePage {
   runIt(){
     for (let ex of this.exercises) {
       let orm = "ORM" + ex
-      this.cycle[0].week1[0].set1[ex] = (65/100) * (90/100 * Number([this][0][orm]))
+      this.cycle[0].week1[0].set1[ex] = (65/100) * (90/100 * Number(this[orm]))
       console.log('ex', this.cycle[0].week1[0].set1[ex]); //@DEBUG
-      // console.log('the number', [this][0][ex]); //@DEBUG
+      console.log('this with []', [this]); //@DEBUG
+      console.log('this without []', this); //@DEBUG
       console.log('thing',[this][0][orm] ); //@DEBUG
       // console.log('ormbench', this.ORMBench); //@DEBUG
     }
