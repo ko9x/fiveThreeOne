@@ -10,11 +10,14 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { SelectDayModal } from '../modals/select-day/select-day-modal';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    SelectDayModal
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    SelectDayModal
   ],
   providers: [
     StatusBar,

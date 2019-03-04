@@ -1,0 +1,22 @@
+select-day-modal {
+    ion-content{
+        .main-card{
+            padding: 2px;
+        }
+        .top-card{
+            text-align: center;
+            display: flex;
+            width: 50% !important;
+            flex-direction: column;
+            margin-left: 25%;
+            margin-top: 30px;
+        }
+        .cancel-button{
+            margin-left: auto;
+            margin-right: auto;
+            display: block !important;
+        }
+        
+    }
+    
+}
