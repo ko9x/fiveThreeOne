@@ -11,6 +11,8 @@ export class HomePage {
 
   public day: string;
   public week: string;
+  public UBWorkoutTitle = 'Bench'
+  public LBWorkoutTitle = 'Squat'
   public ORMBench;
   public ORMSquat;
   public ORMShoulderPress;
@@ -44,10 +46,9 @@ export class HomePage {
       {name: 'set 2', weight: "", reps: ""},
       {name: 'set 3', weight: "", reps: ""}
     ]
+
   reps = [
-    {name: 'week1', reps: ['1 x 5', '1 x 5', '1 x ARAP']},
-    {name: 'week2', reps: ['1 x 3', '1 x 3', '1 x ARAP']},
-    {name: 'week3', reps: ['1 x 5', '1 x 3', '1 x ARAP']}
+    ['1 x 5', '1 x 3', '1 x 5'],['1 x 5', '1 x 3', '1 x 3'],['1 x 5(ARAP)', '1 x 3(ARAP)', '1 x 1(ARAP)']
   ]
 
   constructor(public navCtrl: NavController, public storage: Storage, public modalCtrl: ModalController) {
@@ -74,7 +75,7 @@ export class HomePage {
     });
     this.storage.get('currentDay').then((data) => {
       this.day = data;
-    })
+    });
   }
 
   runIt(){
@@ -85,12 +86,6 @@ export class HomePage {
       console.log('week1 set1', this.cycle[0].week1[0].set1.ex); //@DEBUG
       console.log('cycle', this.cycle); //@DEBUG
     });
-    // for (let ex of this.exercises) {
-    //   let orm = "ORM" + ex
-    //   this.cycle[0].week1[0].set1[0][ex] = Math.round((65/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
-    //   console.log('week1 set1', this.cycle[0].week1[0].set1.ex); //@DEBUG
-    //   console.log('cycle', this.cycle); //@DEBUG
-    // }
     this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
       this.cycle[0].week1[1].set2[index][ex] = Math.round((75/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
@@ -149,9 +144,43 @@ export class HomePage {
       }
       let cycle = this.cycle[0];
       let week = this.week
-      this.UBSets[0].weight = cycle[week][0].set1[0].Bench
-      this.UBSets[1].weight = cycle[week][1].set2[0].Bench
-      this.UBSets[2].weight = cycle[week][2].set3[0].Bench
+      if( week === "week1") {
+        this.reps.forEach((rep, index) => {
+          this.UBSets[index].reps = rep[0]
+          this.LBSets[index].reps = rep[0]
+        });
+      }
+      if( week === "week2") {
+        this.reps.forEach((rep, index) => {
+          this.UBSets[index].reps = rep[1]
+          this.LBSets[index].reps = rep[1]
+        });
+      }
+      if( week === "week3") {
+        this.reps.forEach((rep, index) => {
+          this.UBSets[index].reps = rep[2]
+          this.LBSets[index].reps = rep[2]
+        });
+      }
+      if( this.day !== "wednesday") {
+        this.UBWorkoutTitle = "Bench";
+        this.LBWorkoutTitle = "Squat";
+        this.UBSets[0].weight = cycle[week][0].set1[0].Bench;
+        this.UBSets[1].weight = cycle[week][1].set2[0].Bench;
+        this.UBSets[2].weight = cycle[week][2].set3[0].Bench;
+        this.LBSets[0].weight = cycle[week][0].set1[1].Squat;
+        this.LBSets[1].weight = cycle[week][1].set2[1].Squat;
+        this.LBSets[2].weight = cycle[week][2].set3[1].Squat;
+      } else {
+        this.UBWorkoutTitle = "Shoulder Press";
+        this.LBWorkoutTitle = "Dead Lift";
+        this.UBSets[0].weight = cycle[week][0].set1[2].ShoulderPress;
+        this.UBSets[1].weight = cycle[week][1].set2[2].ShoulderPress;
+        this.UBSets[2].weight = cycle[week][2].set3[2].ShoulderPress;
+        this.LBSets[0].weight = cycle[week][0].set1[3].DeadLift;
+        this.LBSets[1].weight = cycle[week][1].set2[3].DeadLift;
+        this.LBSets[2].weight = cycle[week][2].set3[3].DeadLift;
+      }
     });
 
     cdModal.present();
