@@ -34,6 +34,21 @@ export class HomePage {
       {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
     ]
   }];
+  UBSets = [
+      {name: 'set 1', weight: "", reps: ""},
+      {name: 'set 2', weight: "", reps: ""},
+      {name: 'set 3', weight: "", reps: ""}
+    ]
+  LBSets = [
+      {name: 'set 1', weight: "", reps: ""},
+      {name: 'set 2', weight: "", reps: ""},
+      {name: 'set 3', weight: "", reps: ""}
+    ]
+  reps = [
+    {name: 'week1', reps: ['1 x 5', '1 x 5', '1 x ARAP']},
+    {name: 'week2', reps: ['1 x 3', '1 x 3', '1 x ARAP']},
+    {name: 'week3', reps: ['1 x 5', '1 x 3', '1 x ARAP']}
+  ]
 
   constructor(public navCtrl: NavController, public storage: Storage, public modalCtrl: ModalController) {
     let currentDate = new Date();
@@ -53,60 +68,73 @@ export class HomePage {
     this.storage.get('ORMDeadLift').then((data) =>{
       this.ORMDeadLift = data;
     });
+
+    this.storage.get('currentWeek').then((data) => {
+      this.week = data;
+    });
+    this.storage.get('currentDay').then((data) => {
+      this.day = data;
+    })
   }
 
   runIt(){
     console.log('week 1---------'); //@DEBUG
-    for (let ex of this.exercises) {
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      this.cycle[0].week1[0].set1[ex] = Math.round((65/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
-      console.log('week1 set1', this.cycle[0].week1[0].set1[ex]); //@DEBUG
-    }
-    for (let ex of this.exercises) {
+      this.cycle[0].week1[0].set1[index][ex] = Math.round((65/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      console.log('week1 set1', this.cycle[0].week1[0].set1.ex); //@DEBUG
+      console.log('cycle', this.cycle); //@DEBUG
+    });
+    // for (let ex of this.exercises) {
+    //   let orm = "ORM" + ex
+    //   this.cycle[0].week1[0].set1[0][ex] = Math.round((65/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+    //   console.log('week1 set1', this.cycle[0].week1[0].set1.ex); //@DEBUG
+    //   console.log('cycle', this.cycle); //@DEBUG
+    // }
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      this.cycle[0].week1[1].set2[ex] = Math.round((75/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      this.cycle[0].week1[1].set2[index][ex] = Math.round((75/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
       console.log('week1 set2', this.cycle[0].week1[1].set2[ex]); //@DEBUG
-    }
-    for (let ex of this.exercises) {
+    });
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      this.cycle[0].week1[2].set3[ex] = Math.round((85/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      this.cycle[0].week1[2].set3[index][ex] = Math.round((85/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
       console.log('week1 set3', this.cycle[0].week1[2].set3[ex]); //@DEBUG
-    }
+    });
     console.log('week 2----------'); //@DEBUG
-    for (let ex of this.exercises) {
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      this.cycle[0].week2[0].set1[ex] = Math.round((70/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      this.cycle[0].week2[0].set1[index][ex] = Math.round((70/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
       console.log('week2 set1', this.cycle[0].week2[0].set1[ex]); //@DEBUG
-    }
-    for (let ex of this.exercises) {
+    });
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      this.cycle[0].week2[1].set2[ex] = Math.round((80/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      this.cycle[0].week2[1].set2[index][ex] = Math.round((80/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
       console.log('week2 set2', this.cycle[0].week2[1].set2[ex]); //@DEBUG
-    }
-    for (let ex of this.exercises) {
+    });
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      this.cycle[0].week2[2].set3[ex] = Math.round((90/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      this.cycle[0].week2[2].set3[index][ex] = Math.round((90/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
       console.log('week2 set3', this.cycle[0].week2[2].set3[ex]); //@DEBUG
-    }
+    });
     console.log('week 3--------------'); //@DEBUG
     
-    for (let ex of this.exercises) {
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      this.cycle[0].week3[0].set1[ex] = Math.round((75/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      this.cycle[0].week3[0].set1[index][ex] = Math.round((75/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
       console.log('week3 set1', this.cycle[0].week3[0].set1[ex]); //@DEBUG
-    }
-    for (let ex of this.exercises) {
+    });
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      this.cycle[0].week3[1].set2[ex] = Math.round((85/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      this.cycle[0].week3[1].set2[index][ex] = Math.round((85/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
       console.log('week3 set2', this.cycle[0].week3[1].set2[ex]); //@DEBUG
-    }
-    for (let ex of this.exercises) {
+    });
+    this.exercises.forEach((ex, index) => {
       let orm = "ORM" + ex
-      let rewNum
-      this.cycle[0].week3[2].set3[ex] = Math.round((95/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
+      this.cycle[0].week3[2].set3[index][ex] = Math.round((95/100) * (90/100 * Number(this[orm]))/2.5) * 2.5;
       console.log('week3 set3', this.cycle[0].week3[2].set3[ex]); //@DEBUG
       console.log('mathing',Math.round(this.cycle[0].week3[2].set3[ex]/2.5) * 2.5 ); //@DEBUG
-    }
+    });
   }
 
   selectDayModal() {
@@ -115,8 +143,15 @@ export class HomePage {
     cdModal.onDidDismiss( data => {
       if (data) {
         this.week = data.week.replace(/\s/g, '').toLowerCase();
+        this.storage.set('currentWeek', data.week.replace(/\s/g, '').toLowerCase());
         this.day = data.day.toLowerCase();
+        this.storage.set('currentDay', data.day.toLowerCase())
       }
+      let cycle = this.cycle[0];
+      let week = this.week
+      this.UBSets[0].weight = cycle[week][0].set1[0].Bench
+      this.UBSets[1].weight = cycle[week][1].set2[0].Bench
+      this.UBSets[2].weight = cycle[week][2].set3[0].Bench
     });
 
     cdModal.present();
@@ -145,7 +180,9 @@ export class HomePage {
     let start = this.cycle[0];
     let week = this.week
     let sv = 'week1'
-    console.log('display', start[week]); //@DEBUG
+    console.log('display', start[week][0].set1[0].Bench); //@DEBUG
+    console.log('testing', this.UBSets[0].weight); //@DEBUG
+    console.log('raw', this.cycle); //@DEBUG
   }
 
 }
