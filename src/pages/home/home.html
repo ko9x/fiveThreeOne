@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content padding>
-  {{days}}
     <ion-card class="top-card" (click)="selectDayModal()">
       <ion-card-content center>
         <h1>{{week | addSpace}}</h1> <h2>{{day | titlecase}}</h2>
@@ -33,7 +32,7 @@
     <ion-card>
       <ion-card-content class="exercise-two">
         <h1>Squat</h1>
-        <ion-row no-padding *ngFor="let set of UBSets">
+        <ion-row no-padding *ngFor="let set of LBSets">
             <ion-col col-3 text-center >
               {{set.name}}
             </ion-col>
