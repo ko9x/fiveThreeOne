@@ -12,12 +12,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { SelectDayModal } from '../modals/select-day/select-day-modal';
 
+// import { PipesModule } from '../pipes/pipes.module'
+import { AddSpacePipe } from '../pipes/add-space/add-space';
+
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    SelectDayModal
+    SelectDayModal,
+    AddSpacePipe
+
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,8 @@ import { SelectDayModal } from '../modals/select-day/select-day-modal';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AddSpacePipe
   ]
 })
 export class AppModule {}
