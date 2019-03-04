@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { SelectDayModal } from '../../modals/select-day/select-day-modal';
 
 @Component({
   selector: 'page-home',
@@ -8,16 +9,14 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
 
+  public day: string;
+  public week: string;
   public ORMBench;
   public ORMSquat;
   public ORMShoulderPress;
   public ORMDeadLift;
-  public Bench = 'hello';
   public days: string;
   public exercises = ["Bench","Squat","ShoulderPress","DeadLift"];
-  public week1Percents = [65, 75, 85];
-  public week2Percents = [70, 80, 90];
-  public week3Percents = [75, 85, 95];
   public cycle: Array<any> = [{
     week1: [
       {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
@@ -36,7 +35,7 @@ export class HomePage {
     ]
   }];
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public storage: Storage, public modalCtrl: ModalController) {
     let currentDate = new Date();
     let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     this.days = weekdays[currentDate.getDay()];
@@ -110,6 +109,21 @@ export class HomePage {
     }
   }
 
+  selectDayModal() {
+    let cdModal = this.modalCtrl.create( SelectDayModal );
+
+    cdModal.onDidDismiss( data => {
+      if (data) {
+        this.week = data.week.replace(/\s/g, '').toLowerCase();
+        this.day = data.day.toLowerCase();
+      }
+    });
+
+    cdModal.present();
+
+    
+  }
+
   tryIt() {
     for(let week of this.cycle) {
       for (let set of this.cycle[0].week1) {
@@ -127,7 +141,11 @@ export class HomePage {
   }
 
   displayIt() {
-    console.log('display', this.cycle[0].week2); //@DEBUG
+    console.log('week', this.week); //@DEBUG
+    let start = this.cycle[0];
+    let week = this.week
+    let sv = 'week1'
+    console.log('display', start[week]); //@DEBUG
   }
 
 }
