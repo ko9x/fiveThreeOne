@@ -9,7 +9,7 @@ export class AddSpacePipe implements PipeTransform {
    */
   transform(value: string){
     if (!value) {
-      return 'no val?'
+      return 'select a day'
     } else {
       let end = value[4]
       return "Week " + end;
