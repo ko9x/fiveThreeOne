@@ -53,8 +53,25 @@
           </ion-row>
       </ion-card-content>
     </ion-card>
-    <button class="bottom-button" ion-button *ngIf="weightPerSide" (click)="switchSetWeightDisplay()">Show Total Weight</button>
-    <button class="bottom-button" ion-button *ngIf="!weightPerSide" (click)="switchSetWeightDisplay()">Show Split Weight</button>
+    <div>
+        <button 
+          class="bottom-button" 
+          ion-button 
+          *ngIf="weightPerSide" 
+          (click)="switchSetWeightDisplay()">
+          Show Total Weight
+        </button>
+        <button 
+          class="bottom-button" 
+          ion-button 
+          *ngIf="!weightPerSide" 
+          (click)="switchSetWeightDisplay()">
+          Show Split Weight
+        </button>
+    </div>
+    <div>
+      <button ion-button class="bottom-button" (click)="nextWorkout()">Workout Complete</button>
+    </div>
     <!-- <button ion-button (click)="runIt()">run it</button>
     <button ion-button (click)="displayIt()">display it</button> -->
 </ion-content>

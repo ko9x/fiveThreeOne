@@ -209,6 +209,10 @@ export class HomePage {
     this.weightPerSide = !this.weightPerSide;
   }
 
+  nextWorkout() {
+    
+  }
+
   displayIt() {
     console.log('week', this.week); //@DEBUG
     let start = this.cycle[0];
