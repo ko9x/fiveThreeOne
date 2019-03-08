@@ -2,7 +2,7 @@
 * Make a Commit after every step! 
 
 # What to do next
-* Continue work on the home page
+* Complete nextWorkout functionality
 
 # Things to do
 * add a spinner or something while the data is being retrieved
