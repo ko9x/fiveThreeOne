@@ -209,27 +209,10 @@ export class HomePage {
     this.weightPerSide = !this.weightPerSide;
   }
 
-  tryIt() {
-    for(let week of this.cycle) {
-      for (let set of this.cycle[0].week1) {
-        for (let ex of this.exercises) {
-          this.cycle[0]
-        }
-        console.log('set', set); //@DEBUG
-      }
-      console.log('week', week); //@DEBUG
-    }
-  }
-
-  mathIt() {
-    console.log(Math.round(107.1/2.5) * 2.5 ); //@DEBUG
-  }
-
   displayIt() {
     console.log('week', this.week); //@DEBUG
     let start = this.cycle[0];
     let week = this.week
-    let sv = 'week1'
     console.log('display', start[week][0].set1[0].Bench); //@DEBUG
     console.log('testing', this.UBSets[0].weight); //@DEBUG
     console.log('raw', this.cycle); //@DEBUG
