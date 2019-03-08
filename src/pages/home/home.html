@@ -15,7 +15,8 @@
     </ion-card>
     <ion-card>
       <ion-card-content class="exercise-one">
-        <h1>Bench</h1>
+        <h1 *ngIf="day === 'monday' || day === 'friday' ">Bench</h1>
+        <h1 *ngIf=" day === 'wednesday' ">Shoulder Press</h1>
         <ion-row no-padding *ngFor="let set of UBSets">
           <ion-col col-3 text-center >
             {{set.name}}
@@ -31,7 +32,8 @@
     </ion-card>
     <ion-card>
       <ion-card-content class="exercise-two">
-        <h1>Squat</h1>
+        <h1 *ngIf="day === 'monday' || day === 'friday' ">Squat</h1>
+        <h1 *ngIf="day === 'wednesday' ">Dead Lift</h1>
         <ion-row no-padding *ngFor="let set of LBSets">
             <ion-col col-3 text-center >
               {{set.name}}
