@@ -1,16 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-/**
- * Generated class for the AddSpacePipe pipe.
- *
- * See https://angular.io/api/core/Pipe for more info on Angular Pipes.
- */
 @Pipe({
   name: 'addSpace',
 })
 export class AddSpacePipe implements PipeTransform {
   /**
-   * Takes a value and makes it lowercase.
+   * Adds a space between the word week and the number telling you which week you are on
    */
   transform(value: string){
     if (!value) {
