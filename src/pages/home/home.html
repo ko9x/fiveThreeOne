@@ -45,7 +45,7 @@
                 {{set.weight | halfWeight}}
             </ion-col>
             <ion-col *ngIf="!weightPerSide">
-                {{set.weight | halfWeight}}
+                {{set.weight}}
             </ion-col>
             <ion-col>
               {{set.reps}}
@@ -56,7 +56,5 @@
     <button class="bottom-button" ion-button *ngIf="weightPerSide" (click)="switchSetWeightDisplay()">Show Total Weight</button>
     <button class="bottom-button" ion-button *ngIf="!weightPerSide" (click)="switchSetWeightDisplay()">Show Split Weight</button>
     <!-- <button ion-button (click)="runIt()">run it</button>
-    <button ion-button (click)="tryIt()">try it</button>
-    <button ion-button (click)="mathIt()">math it</button>
     <button ion-button (click)="displayIt()">display it</button> -->
 </ion-content>
