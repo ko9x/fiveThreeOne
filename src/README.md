@@ -4,6 +4,11 @@
 # What to do next
 * Continue work on the home page
 
+# Things to do
+* add a spinner or something while the data is being retrieved
+* If no weights are set the display just says calculating. figure out a way to know if the data will
+    * eventually show up or not and display "enter weight on the other page" or something 
+
 
 #Done
 * figure out how to dispaly the locally stored One Rep Max values
@@ -11,3 +16,4 @@
 * Implement the weight select portion
     * I want the buttons to become disabled once the weight has been stored and stay disabled when you return to the page
     * the page should refresh when you clear the selected weights or the ORMs
+* add default data so the user knows what to do and so the display doesnt say "val ?"
