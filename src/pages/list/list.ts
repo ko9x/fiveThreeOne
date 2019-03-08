@@ -159,7 +159,7 @@ export class ListPage {
     
       const toast = this.toastCtrl.create({
         message: 'Successfully saved One Rep Maxes',
-        duration: 3000,
+        duration: 1500,
         position: 'top'
       });
       toast.present();
