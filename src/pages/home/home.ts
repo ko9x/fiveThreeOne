@@ -17,6 +17,7 @@ export class HomePage {
   public ORMSquat;
   public ORMShoulderPress;
   public ORMDeadLift;
+  public weightPerSide = true;
   public days: string;
   public exercises = ["Bench","Squat","ShoulderPress","DeadLift"];
   public cycle: Array<any> = [{
@@ -202,6 +203,10 @@ export class HomePage {
         this.LBSets[1].weight = cycle[week][1].set2[3].DeadLift;
         this.LBSets[2].weight = cycle[week][2].set3[3].DeadLift;
       }
+  }
+
+  switchSetWeightDisplay() {
+    this.weightPerSide = !this.weightPerSide;
   }
 
   tryIt() {
