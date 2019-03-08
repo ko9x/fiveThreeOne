@@ -12,8 +12,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { SelectDayModal } from '../modals/select-day/select-day-modal';
 
-// import { PipesModule } from '../pipes/pipes.module'
 import { AddSpacePipe } from '../pipes/add-space/add-space';
+import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { AddSpacePipe } from '../pipes/add-space/add-space';
     HomePage,
     ListPage,
     SelectDayModal,
-    AddSpacePipe
+    AddSpacePipe,
+    HalfWeightPipe
 
   ],
   imports: [
@@ -41,7 +42,8 @@ import { AddSpacePipe } from '../pipes/add-space/add-space';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AddSpacePipe
+    AddSpacePipe,
+    HalfWeightPipe
   ]
 })
 export class AppModule {}

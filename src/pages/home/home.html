@@ -21,7 +21,10 @@
           <ion-col col-3 text-center >
             {{set.name}}
           </ion-col>
-          <ion-col>
+          <ion-col *ngIf="weightPerSide">
+            {{set.weight | halfWeight}}
+          </ion-col>
+          <ion-col *ngIf="!weightPerSide">
             {{set.weight}}
           </ion-col>
           <ion-col>
@@ -38,8 +41,11 @@
             <ion-col col-3 text-center >
               {{set.name}}
             </ion-col>
-            <ion-col>
-              {{set.weight}}
+            <ion-col *ngIf="weightPerSide">
+                {{set.weight | halfWeight}}
+            </ion-col>
+            <ion-col *ngIf="!weightPerSide">
+                {{set.weight | halfWeight}}
             </ion-col>
             <ion-col>
               {{set.reps}}
