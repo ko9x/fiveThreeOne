@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { callLifecycleHooksChildrenFirst } from '@angular/core/src/view/provider';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+  selector: 'page-settings',
+  templateUrl: 'settings.html'
 })
-export class ListPage {
+export class SettingsPage {
 
   public cycle : FormGroup;
   public bench = {name:'bench',weight:null};
