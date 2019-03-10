@@ -11,6 +11,7 @@ export class HomePage {
 
   public day: string;
   public week: string;
+  public currentCycle: 'Cycle 1';
   public UBWorkoutTitle = 'Bench'
   public LBWorkoutTitle = 'Squat'
   public ORMBench;
@@ -163,7 +164,7 @@ export class HomePage {
 
   displayWorkout() {
     let cycle = this.cycle[0];
-      let week = this.week
+    let week = this.week || 'week1'
       console.log('cycle', cycle ); //@DEBUG
       console.log('week', week ); //@DEBUG
       if( week === "week1") {
