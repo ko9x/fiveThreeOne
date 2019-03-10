@@ -210,7 +210,25 @@ export class HomePage {
   }
 
   nextWorkout() {
-    
+    if(this.week === 'week3' && this.day === 'friday') {
+      alert('we need to make a modal to change the cycle and start over at mon w1');
+      return;
+    }
+    if(this.day === "wednesday") {
+      console.log('start of 2nd', this.day); //@DEBUG
+      this.day = "friday";
+      console.log('wednesday was true',this.day ); //@DEBUG
+    }else if(this.day === "monday") {
+      console.log('start of first', this.day); //@DEBUG
+      this.day = "wednesday";
+      console.log('monday was true',this.day ); //@DEBUG
+    }else if(this.day === 'friday') {
+      let week = this.week
+      let num = Number(week[4]) + 1
+      let strNum = num.toString()
+      this.week = 'week' + strNum;
+      this.day = 'monday';
+    }
   }
 
   displayIt() {
