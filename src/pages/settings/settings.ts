@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -10,10 +10,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SettingsPage {
 
   public cycle : FormGroup;
-  public bench = {name:'bench',weight:null};
-  public squat = {name:'squat',weight:null};
-  public deadLift = {name:'deadLift',weight:null};
-  public shoulderPress = {name:'shoulderPress',weight:null};
+  public bench = {name:'bench',ORMWeight:null,TMWeight:null};
+  public squat = {name:'squat',ORMWeight:null,TMWeight:null};
+  public deadLift = {name:'deadLift',ORMWeight:null,TMWeight:null};
+  public shoulderPress = {name:'shoulderPress',ORMWeight:null,TMWeight:null};
   public exercises = [this.bench,this.squat,this.shoulderPress,this.deadLift];
   public OW1_2 = {name: '1.2', disabled: false};
   public OW2_5 = {name: '2.5', disabled: false};
@@ -35,21 +35,34 @@ export class SettingsPage {
     public navParams: NavParams, 
     public storage: Storage,
     public formBuilder: FormBuilder,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController
     ) { 
       
 
       this.storage.get('ORMBench').then((data) =>{
-        this.bench.weight = data;
+        this.bench.ORMWeight = data;
       });
       this.storage.get('ORMSquat').then((data) =>{
-        this.squat.weight = data;
+        this.squat.ORMWeight = data;
       });
       this.storage.get('ORMShoulderPress').then((data) =>{
-        this.shoulderPress.weight = data;
+        this.shoulderPress.ORMWeight = data;
       });
       this.storage.get('ORMDeadLift').then((data) =>{
-        this.deadLift.weight = data;
+        this.deadLift.ORMWeight = data;
+      });
+      this.storage.get('TMBench').then((data) =>{
+        this.bench.TMWeight = data;
+      });
+      this.storage.get('TMSquat').then((data) =>{
+        this.squat.TMWeight = data;
+      });
+      this.storage.get('TMShoulderPress').then((data) =>{
+        this.shoulderPress.TMWeight = data;
+      });
+      this.storage.get('TMDeadLift').then((data) =>{
+        this.deadLift.TMWeight = data;
       });
 
       // Can this work? At the moment it takes too long and the page loads before it is done
@@ -155,6 +168,14 @@ export class SettingsPage {
     this.storage.set('ORMSquat', this.cycle.value.squat);
     this.storage.set('ORMShoulderPress', this.cycle.value.shoulderPress);
     this.storage.set('ORMDeadLift', this.cycle.value.deadLift);
+    let TMB = 90/100 * Number(this.cycle.value.bench)/5 * 5
+    let TMS = 90/100 * Number(this.cycle.value.squat)/5 * 5
+    let TMSP = 90/100 * Number(this.cycle.value.shoulderPress)/5 * 5
+    let TMDL = 90/100 * Number(this.cycle.value.deadLift)/5 * 5
+    this.storage.set('TMBench', TMB.toString())
+    this.storage.set('TMSquat', TMS.toString())
+    this.storage.set('TMShoulderPress', TMSP.toString())
+    this.storage.set('TMDeadLift', TMDL.toString())
     
       const toast = this.toastCtrl.create({
         message: 'Successfully saved One Rep Maxes',
@@ -164,7 +185,30 @@ export class SettingsPage {
       toast.present();
   }
 
-  clearORM() {
+  tapClearORM() {
+    const confirm = this.alertCtrl.create({
+      title: 'Are You Sure?',
+      message: 'Clearing your One Rep Maxes will also clear your Training Maxes',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: "Yes",
+          handler: () => {
+            this.clearMaxes();
+          }
+        }
+      ]
+    });
+    confirm.present();
+    
+  }
+
+  clearMaxes() {
     this.storage.remove('ORMBench').then((data) => {
       console.log('ORM Bench', data); //@DEBUG
     });
@@ -177,13 +221,25 @@ export class SettingsPage {
     this.storage.remove('ORMDeadLift').then((data) => {
       console.log('ORM DeadLift', data); //@DEBUG
     });
+    this.storage.remove('TMBench').then((data) => {
+      console.log('TM Bench', data); //@DEBUG
+    });
+    this.storage.remove('TMSquat').then((data) => {
+      console.log('TM Squat', data); //@DEBUG
+    });
+    this.storage.remove('TMShoulderPress').then((data) => {
+      console.log('TM ShoulderPress', data); //@DEBUG
+    });
+    this.storage.remove('TMDeadLift').then((data) => {
+      console.log('TM DeadLift', data); //@DEBUG
+    });
 
      this.exercises = 
      [
-      this.bench = {name:'bench',weight:null},
-      this.squat = {name:'squat',weight:null},
-      this.shoulderPress = {name:'shoulderPress',weight:null},
-      this.deadLift = {name:'deadLift',weight:null}
+      this.bench = {name:'bench',ORMWeight:null,TMWeight:null},
+      this.squat = {name:'squat',ORMWeight:null,TMWeight:null},
+      this.shoulderPress = {name:'shoulderPress',ORMWeight:null,TMWeight:null},
+      this.deadLift = {name:'deadLift',ORMWeight:null,TMWeight:null}
      ];
   }
 
