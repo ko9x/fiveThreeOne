@@ -12,17 +12,17 @@
     <ion-card-content>
         <ion-card-header 
         *ngIf="
-            !bench.weight && 
-            !squat.weight && 
-            !shoulderPress.weight && 
-            !deadLift.weight
+            !bench.ORMWeight && 
+            !squat.ORMWeight && 
+            !shoulderPress.ORMWeight && 
+            !deadLift.ORMWeight
               " text-center>Enter Your One Rep Maxes</ion-card-header>
         <ion-card-header 
         *ngIf="
-          bench.weight && 
-          squat.weight && 
-          shoulderPress.weight && 
-          deadLift.weight
+          bench.ORMWeight && 
+          squat.ORMWeight && 
+          shoulderPress.ORMWeight && 
+          deadLift.ORMWeight
           " text-center>Your One Rep Maxes</ion-card-header>
             <form [formGroup]="cycle" (ngSubmit)="setORM()">
               <ion-row *ngFor="let exercise of exercises" no-padding>
@@ -44,13 +44,7 @@
             <div class="ORMButtons">
               <button 
                 ion-button
-                [disabled]=
-                "
-                  this.bench.ORMWeight || 
-                  this.squat.ORMWeight ||
-                  this.shoulderPress.ORMWeight ||
-                  this.deadLift.ORMWeight
-                "
+                [disabled]="this.bench.ORMWeight || !cycle.valid"
                 full 
                 type="submit" 
                 >Submit
@@ -62,7 +56,7 @@
   </ion-card>
   <ion-card>
     <ion-card-content>
-      <ion-card-header>Your Training Maxes</ion-card-header>
+      <ion-card-header text-center>Your Training Maxes</ion-card-header>
       <ion-row *ngFor="let exercise of exercises" no-padding>
           <ion-col col-6 text-center>
             <h2 >{{exercise.name}}</h2>

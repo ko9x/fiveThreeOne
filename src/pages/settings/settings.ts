@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'page-settings',
@@ -149,10 +149,10 @@ export class SettingsPage {
       });
 
       this.cycle = this.formBuilder.group({
-        bench: [''],
-        squat: [''],
-        shoulderPress: [''],
-        deadLift: ['']
+        bench: ['', Validators.required],
+        squat: ['', Validators.required],
+        shoulderPress: ['', Validators.required],
+        deadLift: ['', Validators.required]
       });
       
     }
