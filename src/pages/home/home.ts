@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SelectDayModal } from '../../modals/select-day/select-day-modal';
+import { NextCycleModal } from '../../modals/next-cycle/next-cycle-modal';
 
 @Component({
   selector: 'page-home',
@@ -145,9 +146,9 @@ export class HomePage {
   }
 
   selectDayModal() {
-    let cdModal = this.modalCtrl.create( SelectDayModal );
+    let sdModal = this.modalCtrl.create( SelectDayModal );
 
-    cdModal.onDidDismiss( data => {
+    sdModal.onDidDismiss( data => {
       if (data) {
         this.week = data.week.replace(/\s/g, '').toLowerCase();
         this.storage.set('currentWeek', data.week.replace(/\s/g, '').toLowerCase());
@@ -157,7 +158,21 @@ export class HomePage {
       this.displayWorkout();
     });
 
-    cdModal.present();
+    sdModal.present();
+
+    
+  }
+  nextCycleModal() {
+    let ncModal = this.modalCtrl.create( NextCycleModal );
+
+    ncModal.onDidDismiss( data => {
+      if (data) {
+        console.log('the data', data); //@DEBUG
+      }
+      this.displayWorkout();
+    });
+
+    ncModal.present();
 
     
   }
@@ -185,6 +200,7 @@ export class HomePage {
           this.LBSets[index].reps = rep[2]
         });
       }
+      console.log('UBSets', this.UBSets); //@DEBUG
       if( this.day !== "wednesday") {
         this.UBWorkoutTitle = "Bench";
         this.LBWorkoutTitle = "Squat";
@@ -212,7 +228,7 @@ export class HomePage {
 
   nextWorkout() {
     if(this.week === 'week3' && this.day === 'friday') {
-      alert('we need to make a modal to change the cycle and start over at mon w1');
+      this.nextCycleModal();
       return;
     }
     if(this.day === "wednesday") {

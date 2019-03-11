@@ -11,6 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { SelectDayModal } from '../modals/select-day/select-day-modal';
+import { NextCycleModal } from '../modals/next-cycle/next-cycle-modal';
 
 import { AddSpacePipe } from '../pipes/add-space/add-space';
 import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
@@ -22,6 +23,7 @@ import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
     HomePage,
     SettingsPage,
     SelectDayModal,
+    NextCycleModal,
     AddSpacePipe,
     HalfWeightPipe
 
@@ -36,7 +38,8 @@ import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
     MyApp,
     HomePage,
     SettingsPage,
-    SelectDayModal
+    SelectDayModal,
+    NextCycleModal
   ],
   providers: [
     StatusBar,
