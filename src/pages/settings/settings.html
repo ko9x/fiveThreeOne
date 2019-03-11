@@ -29,7 +29,7 @@
                 <ion-col col-6 text-center>
                   <h2 class="exercise-name">{{exercise.name}}</h2>
                 </ion-col>
-                <ion-col *ngIf="!exercise.weight" col-6 text-center class="exercise-weight">
+                <ion-col *ngIf="!exercise.ORMWeight" col-6 text-center class="exercise-weight">
                   <ion-input
                     text-center 
                     formControlName="{{exercise.name}}" 
@@ -37,15 +37,42 @@
                     placeholder="Enter Weight">
                   </ion-input>
                 </ion-col>
-                <ion-col *ngIf="exercise.weight" col-6 text-center class="exercise-weight">
-                  <h2>{{exercise.weight}}</h2>
+                <ion-col *ngIf="exercise.ORMWeight" col-6 text-center class="exercise-weight">
+                  <h2>{{exercise.ORMWeight}}</h2>
                 </ion-col>
             </ion-row>
             <div class="ORMButtons">
-                <button ion-button full type="submit">Submit</button>
-                <button ion-button full type="button" (click)="clearORM()">Clear</button>
+              <button 
+                ion-button
+                [disabled]=
+                "
+                  this.bench.ORMWeight || 
+                  this.squat.ORMWeight ||
+                  this.shoulderPress.ORMWeight ||
+                  this.deadLift.ORMWeight
+                "
+                full 
+                type="submit" 
+                >Submit
+              </button>
+                <button ion-button full type="button" (click)="tapClearORM()">Clear</button>
             </div>
           </form>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-header>Your Training Maxes</ion-card-header>
+      <ion-row *ngFor="let exercise of exercises" no-padding>
+          <ion-col col-6 text-center>
+            <h2 >{{exercise.name}}</h2>
+          </ion-col>
+          <ion-col col-6 text-center>
+              <h2>{{exercise.TMWeight}}</h2>
+          </ion-col>
+      </ion-row>
+      <p>Your TM (Training Max) is a percentage of your 1RM (One Rep Max) to train with.</p>
+      <p>After each cycle we will add weight to your TM not your 1RM</p>
     </ion-card-content>
   </ion-card>
   <ion-card>
