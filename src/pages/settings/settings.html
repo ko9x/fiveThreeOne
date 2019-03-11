@@ -12,11 +12,11 @@
     <ion-card-content>
         <ion-card-header 
         *ngIf="
-            !bench.ORMWeight && 
-            !squat.ORMWeight && 
-            !shoulderPress.ORMWeight && 
-            !deadLift.ORMWeight
-              " text-center>Enter Your One Rep Maxes</ion-card-header>
+          !bench.ORMWeight && 
+          !squat.ORMWeight && 
+          !shoulderPress.ORMWeight && 
+          !deadLift.ORMWeight
+          " text-center>Enter Your One Rep Maxes</ion-card-header>
         <ion-card-header 
         *ngIf="
           bench.ORMWeight && 
@@ -54,7 +54,7 @@
           </form>
     </ion-card-content>
   </ion-card>
-  <ion-card>
+  <ion-card *ngIf="trainingMaxes">
     <ion-card-content>
       <ion-card-header text-center>Your Training Maxes</ion-card-header>
       <ion-row *ngFor="let exercise of exercises" no-padding>

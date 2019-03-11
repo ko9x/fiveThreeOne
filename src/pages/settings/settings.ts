@@ -29,6 +29,7 @@ export class SettingsPage {
   public heavyWeights = [this.OW25,this.OW35,this.OW45,this.OW100];
   public upperButtons = Array(4).fill(false); // e.g. 10 = size of items
   public lowerButtons = Array(4).fill(false); // e.g. 10 = size of items
+  public trainingMaxes = true;
 
   constructor(
     public navCtrl: NavController, 
@@ -38,8 +39,8 @@ export class SettingsPage {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController
     ) { 
+      console.log('constructor ran'); //@DEBUG
       
-
       this.storage.get('ORMBench').then((data) =>{
         this.bench.ORMWeight = data;
       });
@@ -61,25 +62,17 @@ export class SettingsPage {
       this.storage.get('TMShoulderPress').then((data) =>{
         this.shoulderPress.TMWeight = data;
       });
-      this.storage.get('TMDeadLift').then((data) =>{
+      this.storage.get('TMDeadLift').then((data) => {
         this.deadLift.TMWeight = data;
       });
-
-      // Can this work? At the moment it takes too long and the page loads before it is done
-
-      // for (let name of this.lightWeightNames) {
-      //   console.log('name', name); //@DEBUG
-      //   this.storage.get('OW' + name + 'disabled').then((data) => {
-      //     console.log('data', data); //@DEBUG
-      //     if (data === 'true'){
-      //       this.lightWeights[0].disabled = true;
-      //       console.log('the thing', this.lightWeights[0]); //@DEBUG
-      //     } else {
-      //       this.lightWeights[0].disabled = false;
-      //     }
-      //   });
-      // };
-
+      this.storage.get('trainingMaxes').then((data) => {
+        console.log('TMdata', data); //@DEBUG
+        if(data === 'true') {
+          this.trainingMaxes = true;
+        } else {
+          this.trainingMaxes = false;
+        }
+      });
 
       // This is obviously too repetitive
 
@@ -164,18 +157,29 @@ export class SettingsPage {
   // ORM stands for One Rep Max
   
   setORM() {
+    let TCV = this.cycle.value
     this.storage.set('ORMBench', this.cycle.value.bench);
     this.storage.set('ORMSquat', this.cycle.value.squat);
     this.storage.set('ORMShoulderPress', this.cycle.value.shoulderPress);
     this.storage.set('ORMDeadLift', this.cycle.value.deadLift);
-    let TMB = 90/100 * Number(this.cycle.value.bench)/5 * 5
-    let TMS = 90/100 * Number(this.cycle.value.squat)/5 * 5
-    let TMSP = 90/100 * Number(this.cycle.value.shoulderPress)/5 * 5
-    let TMDL = 90/100 * Number(this.cycle.value.deadLift)/5 * 5
-    this.storage.set('TMBench', TMB.toString())
-    this.storage.set('TMSquat', TMS.toString())
-    this.storage.set('TMShoulderPress', TMSP.toString())
-    this.storage.set('TMDeadLift', TMDL.toString())
+    let TMB = 90/100 * Number(this.cycle.value.bench)/5 * 5;
+    let TMS = 90/100 * Number(this.cycle.value.squat)/5 * 5;
+    let TMSP = 90/100 * Number(this.cycle.value.shoulderPress)/5 * 5;
+    let TMDL = 90/100 * Number(this.cycle.value.deadLift)/5 * 5;
+    this.storage.set('TMBench', TMB.toString());
+    this.storage.set('TMSquat', TMS.toString());
+    this.storage.set('TMShoulderPress', TMSP.toString());
+    this.storage.set('TMDeadLift', TMDL.toString());
+    this.storage.set('trainingMaxes', 'true');
+    this.trainingMaxes = true;
+
+    this.exercises = 
+     [
+      this.bench = {name:'bench',ORMWeight:TCV.bench,TMWeight:TMB},
+      this.squat = {name:'squat',ORMWeight:TCV.squat,TMWeight:TMS},
+      this.shoulderPress = {name:'shoulderPress',ORMWeight:TCV.shoulderPress,TMWeight:TMSP},
+      this.deadLift = {name:'deadLift',ORMWeight:TCV.deadLift,TMWeight:TMDL}
+     ];
     
       const toast = this.toastCtrl.create({
         message: 'Successfully saved One Rep Maxes',
@@ -233,6 +237,11 @@ export class SettingsPage {
     this.storage.remove('TMDeadLift').then((data) => {
       console.log('TM DeadLift', data); //@DEBUG
     });
+    this.storage.remove('trainingMaxes').then((data) => {
+      console.log('trainingMaxes', data); //@DEBUG
+    });
+
+    this.trainingMaxes = false;
 
      this.exercises = 
      [
@@ -241,6 +250,13 @@ export class SettingsPage {
       this.shoulderPress = {name:'shoulderPress',ORMWeight:null,TMWeight:null},
       this.deadLift = {name:'deadLift',ORMWeight:null,TMWeight:null}
      ];
+
+     this.cycle = this.formBuilder.group({
+      bench: ['', Validators.required],
+      squat: ['', Validators.required],
+      shoulderPress: ['', Validators.required],
+      deadLift: ['', Validators.required]
+    });
   }
 
   // Weight Section
