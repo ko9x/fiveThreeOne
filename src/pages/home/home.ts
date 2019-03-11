@@ -246,6 +246,8 @@ export class HomePage {
       this.week = 'week' + strNum;
       this.day = 'monday';
     }
+    this.storage.set('currentWeek',this.week);
+    this.storage.set('currentDay', this.day);
   }
 
   displayIt() {
