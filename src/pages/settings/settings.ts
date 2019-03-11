@@ -162,10 +162,10 @@ export class SettingsPage {
     this.storage.set('ORMSquat', this.cycle.value.squat);
     this.storage.set('ORMShoulderPress', this.cycle.value.shoulderPress);
     this.storage.set('ORMDeadLift', this.cycle.value.deadLift);
-    let TMB = 90/100 * Number(this.cycle.value.bench)/5 * 5;
-    let TMS = 90/100 * Number(this.cycle.value.squat)/5 * 5;
-    let TMSP = 90/100 * Number(this.cycle.value.shoulderPress)/5 * 5;
-    let TMDL = 90/100 * Number(this.cycle.value.deadLift)/5 * 5;
+    let TMB = Math.round(90/100 * Number(this.cycle.value.bench)/5) * 5;
+    let TMS = Math.round(90/100 * Number(this.cycle.value.squat)/5) * 5;
+    let TMSP = Math.round(90/100 * Number(this.cycle.value.shoulderPress)/5) * 5;
+    let TMDL = Math.round(90/100 * Number(this.cycle.value.deadLift)/5) * 5;
     this.storage.set('TMBench', TMB.toString());
     this.storage.set('TMSquat', TMS.toString());
     this.storage.set('TMShoulderPress', TMSP.toString());
