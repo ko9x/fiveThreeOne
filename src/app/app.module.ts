@@ -6,6 +6,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
+import { OptionsPage } from '../pages/options/options';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,6 +27,7 @@ import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
     MyApp,
     HomePage,
     SettingsPage,
+    OptionsPage,
     SelectDayModal,
     NextCycleModal,
     CycleEndModal,
@@ -46,6 +48,7 @@ import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
     MyApp,
     HomePage,
     SettingsPage,
+    OptionsPage,
     SelectDayModal,
     NextCycleModal,
     CycleEndModal,
