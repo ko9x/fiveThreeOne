@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SelectDayModal } from '../../modals/select-day/select-day-modal';
-import { CycleEndModal } from '../../modals/cycle-end/cycle-end-modal';
+import { OptionsPage } from '../options/options';
 
 @Component({
   selector: 'page-home',
@@ -12,9 +12,9 @@ export class HomePage {
 
   public day: string;
   public week: string;
-  public currentCycle: 'Cycle 1';
-  public UBWorkoutTitle = 'Bench'
-  public LBWorkoutTitle = 'Squat'
+  public currentCycle = 'Cycle 1';
+  public UBWorkoutTitle = 'Bench';
+  public LBWorkoutTitle = 'Squat';
   public ORMBench;
   public ORMSquat;
   public ORMShoulderPress;
@@ -162,20 +162,6 @@ export class HomePage {
 
     
   }
-  cycleEndModal() {
-    let ceModal = this.modalCtrl.create( CycleEndModal );
-
-    ceModal.onDidDismiss( data => {
-      if (data) {
-        console.log('the data', data); //@DEBUG
-      }
-      this.displayWorkout();
-    });
-
-    ceModal.present();
-
-    
-  }
 
   displayWorkout() {
     let cycle = this.cycle[0];
@@ -228,7 +214,7 @@ export class HomePage {
 
   nextWorkout() {
     if(this.week === 'week3' && this.day === 'friday') {
-      this.cycleEndModal();
+      this.navCtrl.push( OptionsPage, {currentCycle:this.currentCycle});
       return;
     }
     if(this.day === "wednesday") {

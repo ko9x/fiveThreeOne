@@ -22,9 +22,8 @@ export class OptionsPage {
     public storage: Storage
     ) {
 
-      this.storage.get('currentCycle').then((data) => {
-        this.currentCycle = data || 'Cycle 1';
-    });
+      this.currentCycle = navParams.get('currentCycle')
+      console.log('currentCycle', this.currentCycle); //@DEBUG
   }
 
   deloadModal() {
