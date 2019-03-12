@@ -1,5 +1,28 @@
 <ion-content>
-    help-modal
-
+    <ion-card>
+        <ion-card-content >
+            <ion-card-header text-center>Training Max Testing</ion-card-header>
+            <p>The 5/3/1 program recommends regular TM Testing to ensure your TM is not too high.</p>
+            <p>If your TM is determined to be too high, then you will want to deload.</p>
+            <p>For the TM test week you will still be lifting 3 days a week but the workouts are as follows.</p>
+            <ion-card class="top-card">
+                <ion-row *ngFor="let set of exampleSets">
+                    <ion-col col-4 text-center>{{set.name}}</ion-col>
+                    <ion-col col-4 >{{set.weight}}</ion-col>
+                    <ion-col col-4 >{{set.reps}}</ion-col>
+                </ion-row>
+            </ion-card>
+            <p>Moday is Squats, Wednesday is Shoulder Press followed by Dead Lifts, and Friday is Bench press.</p>
+            <p>If your TM is correct you should be able to do 3-5 reps at 100%. If you are able to hit 3-5 then move on to the next cycle and add 5 pounds to upper body workouts and 10 to lower body workouts.</p>
+            <p>If you were unable to hit 3-5 reps at 100% you may want to deload and get your TM dialed in.</p>
+            <p>Don't be discouraged if you are unable to hit 3-5 reps. Deloading is a normal part of the 5/3/1 process.</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <ion-card-header text-center>Deloading</ion-card-header>
+            <p>If you have determined that your TM is too high by doing a TM Test or if you just feel worn out and need a bit of a break after the Cycle, There are several Deloading options to choose from. Which you choose is up to you and it may take some time to figure out what combination of Deloading and TM testing is right for you.</p>
+        </ion-card-content>
+    </ion-card>
     <button ion-button (click)="cancel()">Cancel</button>
 </ion-content>
