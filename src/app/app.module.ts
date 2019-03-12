@@ -12,6 +12,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { SelectDayModal } from '../modals/select-day/select-day-modal';
 import { NextCycleModal } from '../modals/next-cycle/next-cycle-modal';
+import { CycleEndModal } from '../modals/cycle-end/cycle-end-modal';
+import { HelpModal } from '../modals/help/help-modal';
+import { TMTestModal } from '../modals/tm-test/tm-test-modal';
+import { DeloadModal } from '../modals/deload/deload-modal';
 
 import { AddSpacePipe } from '../pipes/add-space/add-space';
 import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
@@ -24,6 +28,10 @@ import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
     SettingsPage,
     SelectDayModal,
     NextCycleModal,
+    CycleEndModal,
+    HelpModal,
+    TMTestModal,
+    DeloadModal,
     AddSpacePipe,
     HalfWeightPipe
 
@@ -39,7 +47,11 @@ import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
     HomePage,
     SettingsPage,
     SelectDayModal,
-    NextCycleModal
+    NextCycleModal,
+    CycleEndModal,
+    HelpModal,
+    TMTestModal,
+    DeloadModal
   ],
   providers: [
     StatusBar,

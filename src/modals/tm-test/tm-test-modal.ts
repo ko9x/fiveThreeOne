@@ -4,10 +4,10 @@ import { Storage } from '@ionic/storage';
 
 
 @Component({
-    selector: 'next-cycle-modal',
-    templateUrl: 'next-cycle-modal.html'
+    selector: 'tm-test-modal',
+    templateUrl: 'tm-test-modal.html'
 })
-export class NextCycleModal {
+export class TMTestModal {
 
     public currentCycle: string;
     
@@ -17,12 +17,10 @@ export class NextCycleModal {
         public viewCtrl: ViewController
     ) {
         
-        this.storage.get('currentCycle').then((data) => {
-            this.currentCycle = data || 'Cycle 1';
-        });
+       
     }
-
     cancel() {
         this.viewCtrl.dismiss();
     }
+
 }

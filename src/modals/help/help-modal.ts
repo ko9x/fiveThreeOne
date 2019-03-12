@@ -4,25 +4,24 @@ import { Storage } from '@ionic/storage';
 
 
 @Component({
-    selector: 'next-cycle-modal',
-    templateUrl: 'next-cycle-modal.html'
+    selector: 'help-modal',
+    templateUrl: 'help-modal.html'
 })
-export class NextCycleModal {
+export class HelpModal {
 
     public currentCycle: string;
     
     constructor(
-        public storage: Storage, 
+        public storage: Storage,
         public alertCtrl: AlertController,
         public viewCtrl: ViewController
     ) {
         
-        this.storage.get('currentCycle').then((data) => {
-            this.currentCycle = data || 'Cycle 1';
-        });
+        
     }
 
     cancel() {
         this.viewCtrl.dismiss();
     }
+
 }
