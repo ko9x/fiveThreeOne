@@ -2,12 +2,9 @@
 * Make a Commit after every step! 
 
 # What to do next
-* Finish the next-cycle-modal 
-    * after each cycle I want the user to have a deload and TM test option
-        * inform the users that a deload week followed by a TM test week is recommended
-    * If they choose to skip the deload week and just do the TM test it's a week of 90% TM reps
-    * If they choose deload they will need to choose which deload they want to do
-        * after the deload week they will be given the option to do the TM test week or skip it
+* Finish the options page and its associated modals 
+    * decide how much more information to add to the information page
+    * fill out the deload modal
     * the deload and TM test weeks need a special calender and an option to quit back to default
     * after the deload/TM test decision the user can choose if they want to add/subtact weight or leave it
 
@@ -19,6 +16,7 @@
 
 
 #Done
+* after each cycle I want the user to have a deload and TM test option
 * figure out how to dispaly the locally stored One Rep Max values
     * I made an array of objects with the properties I needed nested inside the objects
 * Implement the weight select portion
