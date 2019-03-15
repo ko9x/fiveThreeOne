@@ -16,8 +16,8 @@
           <p text-center class="info-text">Click to see the TM test instructions</p>
           <button ion-button class="option-button" (click)="deloadModal()">Deload</button>
           <p text-center class="info-text">Click to see the Deload instructions</p>
-          <button ion-button class="option-button" (click)="nextCycleModal()">Next Cycle</button>
-          <p text-center class="info-text">Click to move on to the next cycle</p>
+          <button ion-button *ngIf="currentCycle" class="option-button" (click)="nextCycleModal()">Next Cycle</button>
+          <p text-center *ngIf="currentCycle" class="info-text">Click to move on to the next cycle</p>
           <button ion-button class="option-button" (click)="helpModal()">Information</button>
           <p text-center class="info-text">Click for information about the options</p>
       </ion-card-content>
