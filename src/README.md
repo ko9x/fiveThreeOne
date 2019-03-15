@@ -2,6 +2,8 @@
 * Make a Commit after every step! 
 
 # What to do next
+* Finish figuring out how to display the TM test data in the home page
+    * need to lock out the calender during the TM and deload weeks. replace with an alert to exit TM or Dload
 * Finish the options page and its associated modals 
     * decide how much more information to add to the information page
     * fill out the deload modal
