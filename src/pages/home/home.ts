@@ -16,10 +16,10 @@ export class HomePage {
   public currentCycle = 'Cycle 1';
   public UBWorkoutTitle = 'Bench';
   public LBWorkoutTitle = 'Squat';
-  public ORMBench;
-  public ORMSquat;
-  public ORMShoulderPress;
-  public ORMDeadLift;
+  public TMBench;
+  public TMSquat;
+  public TMShoulderPress;
+  public TMDeadLift;
   public weightPerSide = true;
   public days: string;
   public exercises = ["Bench","Squat","ShoulderPress","DeadLift"];
@@ -40,6 +40,13 @@ export class HomePage {
       {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
     ]
   }];
+  public TMTCycle: Array<any> = [{
+    TMTWeek: [
+      {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set2: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
+    ]
+  }]
   UBSets = [
       {name: 'set 1', weight: "", reps: ""},
       {name: 'set 2', weight: "", reps: ""},
@@ -77,17 +84,21 @@ export class HomePage {
   }
 
   retrieveStorageData() {
-    this.storage.get('ORMBench').then((data) =>{
-      this.ORMBench = data;
+    this.storage.get('TMBench').then((data) =>{
+      this.TMBench = data;
+      console.log('tmBench', data); //@DEBUG
     });
-    this.storage.get('ORMSquat').then((data) =>{
-      this.ORMSquat = data;
+    this.storage.get('TMSquat').then((data) =>{
+      this.TMSquat = data;
+      console.log('tmSquat', data); //@DEBUG
     });
-    this.storage.get('ORMShoulderPress').then((data) =>{
-      this.ORMShoulderPress = data;
+    this.storage.get('TMShoulderPress').then((data) =>{
+      this.TMShoulderPress = data;
+      console.log('tmShoulder', data); //@DEBUG
     });
-    this.storage.get('ORMDeadLift').then((data) =>{
-      this.ORMDeadLift = data;
+    this.storage.get('TMDeadLift').then((data) =>{
+      this.TMDeadLift = data;
+      console.log('tmDead', data); //@DEBUG
     });
     this.storage.get('currentWeek').then((data) => {
       this.week = data;
@@ -98,54 +109,61 @@ export class HomePage {
     
   }
 
+  TMTRun(){
+    this.exercises.forEach((ex, index) => {
+      let orm = "ORM" + ex
+      this.TMTCycle[0].TMTWeek[0].set[index][ex]
+    });
+  }
+
   runIt(){
     console.log('week 1---------'); //@DEBUG
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week1[0].set1[index][ex] = Math.round((65/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week1[0].set1[index][ex] = Math.round((65/100) * this[tm]/5) * 5;
       console.log('week1 set1', this.cycle[0].week1[0].set1[index]); //@DEBUG
     });
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week1[1].set2[index][ex] = Math.round((75/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week1[1].set2[index][ex] = Math.round((75/100) * this[tm]/5) * 5;
       console.log('week1 set2', this.cycle[0].week1[1].set2[index]); //@DEBUG
     });
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week1[2].set3[index][ex] = Math.round((85/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week1[2].set3[index][ex] = Math.round((85/100) * this[tm]/5) * 5;
       console.log('week1 set3', this.cycle[0].week1[2].set3[index]); //@DEBUG
     });
     console.log('week 2----------'); //@DEBUG
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week2[0].set1[index][ex] = Math.round((70/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week2[0].set1[index][ex] = Math.round((70/100) * this[tm]/5) * 5;
       console.log('week2 set1', this.cycle[0].week2[0].set1[index]); //@DEBUG
     });
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week2[1].set2[index][ex] = Math.round((80/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week2[1].set2[index][ex] = Math.round((80/100) * this[tm]/5) * 5;
       console.log('week2 set2', this.cycle[0].week2[1].set2[index]); //@DEBUG
     });
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week2[2].set3[index][ex] = Math.round((90/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week2[2].set3[index][ex] = Math.round((90/100) * this[tm]/5) * 5;
       console.log('week2 set3', this.cycle[0].week2[2].set3[index]); //@DEBUG
     });
     console.log('week 3--------------'); //@DEBUG
     
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week3[0].set1[index][ex] = Math.round((75/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week3[0].set1[index][ex] = Math.round((75/100) * this[tm]/5) * 5;
       console.log('week3 set1', this.cycle[0].week3[0].set1[index]); //@DEBUG
     });
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week3[1].set2[index][ex] = Math.round((85/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week3[1].set2[index][ex] = Math.round((85/100) * this[tm]/5) * 5;
       console.log('week3 set2', this.cycle[0].week3[1].set2[index]); //@DEBUG
     });
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.cycle[0].week3[2].set3[index][ex] = Math.round((95/100) * (90/100 * Number(this[orm]))/5) * 5;
+      let tm = "TM" + ex
+      this.cycle[0].week3[2].set3[index][ex] = Math.round((95/100) * this[tm]/5) * 5;
       console.log('week3 set3', this.cycle[0].week3[2].set3[index]); //@DEBUG
       // console.log('mathing',Math.round(this.cycle[0].week3[2].set3[ex]/2.5) * 2.5 ); //@DEBUG
     });
