@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SelectDayModal } from '../../modals/select-day/select-day-modal';
 import { OptionsPage } from '../options/options';
@@ -10,6 +10,7 @@ import { OptionsPage } from '../options/options';
 })
 export class HomePage {
 
+  public tmt: string;
   public day: string;
   public week: string;
   public currentCycle = 'Cycle 1';
@@ -54,13 +55,19 @@ export class HomePage {
     ['1 x 5', '1 x 3', '1 x 5'],['1 x 5', '1 x 3', '1 x 3'],['1 x 5(ARAP)', '1 x 3(ARAP)', '1 x 1(ARAP)']
   ]
 
-  constructor(public navCtrl: NavController, public storage: Storage, public modalCtrl: ModalController) {
+  constructor(
+    public navCtrl: NavController, 
+    public storage: Storage, 
+    public modalCtrl: ModalController,
+    public navParams: NavParams
+    ) {
     let currentDate = new Date();
     let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     this.days = weekdays[currentDate.getDay()];
     console.log('days', this.days); //@DEBUG
 
     this.retrieveStorageData();
+    this.tmt = this.navParams.get('tmt');
 
     setTimeout(() => {
       this.runIt();  }, 600);

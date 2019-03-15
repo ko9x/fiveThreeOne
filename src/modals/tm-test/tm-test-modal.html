@@ -1,5 +1,24 @@
 <ion-content>
-    tm-test-modal
+    <ion-card>
+        <ion-card-content>
+            <ion-card-header text-center>Training Max Testing</ion-card-header>
+            <p>Weight training with the correct Training Max is what 5/3/1 is all about.</p>
+            <p>To ensure your TM is correct, it is recommended that you test your TM after every cycle or every other cycle.</p>
+            <p>Training Max Testing involves <strong>One Week </strong> of high percentage lifts to see where you are at.</p>
+            <p>Below you can see your schedule for each day of the Training Max Test Week.</p>
+            <ion-card class="top-card">
+                <ion-row *ngFor="let set of exampleSets">
+                    <ion-col col-4 text-center>{{set.name}}</ion-col>
+                    <ion-col col-4 >{{set.weight}}</ion-col>
+                    <ion-col col-4 >{{set.reps}}</ion-col>
+                </ion-row>
+            </ion-card>
+            <p>Monday you will do Squats at the percentages and reps listed above.</p>
+            <p>Wednesday is Shoulder Press followed by Dead Lifts.</p>
+            <p>Friday you will wrap up the testing by doing Bench Press </p>
+        </ion-card-content>
+    </ion-card>
 
-    <button ion-button (click)="cancel()">Cancel</button>
+    <button ion-button class="bottom-button" (click)="TMTAlert()">Begin</button>
+    <button ion-button class="bottom-button" (click)="cancel()">Cancel</button>
 </ion-content>
