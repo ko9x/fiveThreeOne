@@ -44,7 +44,8 @@ export class HomePage {
     TMTWeek: [
       {set1: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
       {set2: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
-      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
+      {set3: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]},
+      {set4: [{Bench: "" },{Squat: ""},{ShoulderPress: ""},{DeadLift: ""}]}
     ]
   }]
   UBSets = [
@@ -57,10 +58,23 @@ export class HomePage {
       {name: 'set 2', weight: "", reps: ""},
       {name: 'set 3', weight: "", reps: ""}
     ]
+    TMUBSets = [
+      {name: 'set 1', weight: "", reps: '1 x 5'},
+      {name: 'set 2', weight: "", reps: '1 x 5'},
+      {name: 'set 3', weight: "", reps: '1 x 5'},
+      {name: 'set 4', weight: "", reps: '1 x 3-5'}
+    ]
+    TMLBSets = [
+      {name: 'set 1', weight: "", reps: '1 x 5'},
+      {name: 'set 2', weight: "", reps: '1 x 5'},
+      {name: 'set 3', weight: "", reps: '1 x 5'},
+      {name: 'set 4', weight: "", reps: '1 x 3-5'}
+    ]
 
   reps = [
     ['1 x 5', '1 x 3', '1 x 5'],['1 x 5', '1 x 3', '1 x 3'],['1 x 5(ARAP)', '1 x 3(ARAP)', '1 x 1(ARAP)']
   ]
+
 
   constructor(
     public navCtrl: NavController, 
@@ -111,12 +125,50 @@ export class HomePage {
 
   TMTRun(){
     this.exercises.forEach((ex, index) => {
-      let orm = "ORM" + ex
-      this.TMTCycle[0].TMTWeek[0].set[index][ex]
+      let tm = "TM" + ex
+      this.TMTCycle[0].TMTWeek[0].set1[index][ex] = Math.round((70/100) * this[tm]/5) * 5;
+      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
+    });
+    this.exercises.forEach((ex, index) => {
+      let tm = "TM" + ex
+      this.TMTCycle[0].TMTWeek[1].set2[index][ex] = Math.round((80/100) * this[tm]/5) * 5;
+      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
+    });
+    this.exercises.forEach((ex, index) => {
+      let tm = "TM" + ex
+      this.TMTCycle[0].TMTWeek[2].set3[index][ex] = Math.round((90/100) * this[tm]/5) * 5;
+      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
+    });
+    this.exercises.forEach((ex, index) => {
+      let tm = "TM" + ex
+      this.TMTCycle[0].TMTWeek[3].set4[index][ex] = Math.round((100/100) * this[tm]/5) * 5;
+      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
     });
   }
 
   runIt(){
+    console.log('TMTWeek -------');
+    this.exercises.forEach((ex, index) => {
+      let tm = "TM" + ex
+      this.TMTCycle[0].TMTWeek[0].set1[index][ex] = Math.round((70/100) * this[tm]/5) * 5;
+      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
+    });
+    this.exercises.forEach((ex, index) => {
+      let tm = "TM" + ex
+      this.TMTCycle[0].TMTWeek[1].set2[index][ex] = Math.round((80/100) * this[tm]/5) * 5;
+      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
+    });
+    this.exercises.forEach((ex, index) => {
+      let tm = "TM" + ex
+      this.TMTCycle[0].TMTWeek[2].set3[index][ex] = Math.round((90/100) * this[tm]/5) * 5;
+      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
+    });
+    this.exercises.forEach((ex, index) => {
+      let tm = "TM" + ex
+      this.TMTCycle[0].TMTWeek[3].set4[index][ex] = Math.round((100/100) * this[tm]/5) * 5;
+      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
+    });
+    console.log('tmtCycle', this.TMTCycle); //@DEBUG
     console.log('week 1---------'); //@DEBUG
     this.exercises.forEach((ex, index) => {
       let tm = "TM" + ex
@@ -188,7 +240,19 @@ export class HomePage {
     
   }
 
+  displayTMTWorkout() {
+    
+    if(this.day === "monday") {
+      let cycle = this.TMTCycle;
+      this.UBWorkoutTitle = "Squat";
+      cycle.forEach((set, index) => {
+        console.log('set', set.TMTWeek[index].set1[index].Bench); //@DEBUG
+      });
+    }
+  }
+
   displayWorkout() {
+    this.displayTMTWorkout();
     let cycle = this.cycle[0];
     let week = this.week || 'week1'
       console.log('cycle', cycle ); //@DEBUG
