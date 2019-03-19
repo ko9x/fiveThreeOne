@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, NavController, AlertController } from 'ionic-angular';
+import { ViewController, NavController, AlertController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../../pages/home/home';
 
@@ -24,7 +24,8 @@ export class TMTestModal {
         public storage: Storage, 
         public alertCtrl: AlertController,
         public viewCtrl: ViewController,
-        public navCtrl: NavController
+        public navCtrl: NavController,
+        public app: App
     ) {
         
        
@@ -56,7 +57,9 @@ export class TMTestModal {
     }
 
     beginTMTest() {
-        this.navCtrl.setRoot(HomePage, {tmt:this.tmt, day:this.day})
+      this.viewCtrl.dismiss().then(() => {
+        this.app.getRootNav().setRoot(HomePage, {tmt:this.tmt, day:this.day});
+    });
     }
 
 }
