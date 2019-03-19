@@ -3,6 +3,7 @@ import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SelectDayModal } from '../../modals/select-day/select-day-modal';
 import { OptionsPage } from '../options/options';
+import { CurrentDayService } from '../../providers/current-day-service/current-day-service';
 
 @Component({
   selector: 'page-home',
@@ -82,7 +83,8 @@ export class HomePage {
     public navCtrl: NavController, 
     public storage: Storage, 
     public modalCtrl: ModalController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public currentDayService: CurrentDayService
     ) {
     let currentDate = new Date();
     let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
@@ -91,8 +93,7 @@ export class HomePage {
 
     this.retrieveStorageData();
     this.tmt = this.navParams.get('tmt');
-    this.day = this.navParams.get('day');
-    this.storage.set('currentDay', this.day);
+    this.getCurrentDay();
     
     if(this.tmt) {
       console.log('thisday', this.day); //@DEBUG
@@ -118,9 +119,15 @@ export class HomePage {
           this.displayWorkout();  }, 800);
     }
 
-    
+  }
 
-    
+  getCurrentDay() {
+    this.currentDayService.getCurrentDay().then((currentDay) => {
+      if(currentDay) {
+        this.day = currentDay;
+      }
+      console.log('new func', this.day); //@DEBUG
+    });
   }
   
 
