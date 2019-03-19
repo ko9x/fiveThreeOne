@@ -1,8 +1,6 @@
 import { Storage } from '@ionic/storage';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Platform, Events } from 'ionic-angular';
 import 'rxjs/Rx';
 
 
@@ -17,38 +15,18 @@ export class CurrentDayService {
   public pendingInvites: Array<Object>;
 
   constructor(
-    public http: HttpClient, 
-    public platform: Platform, 
     public storage: Storage,
-    public events: Events
     ) {
   }
 
-  /**
-   * clears the login and password from local storage (for debugging)
-   */
-  clearLoginAndPass() {
-    return this.storage.remove( 'username' ).then((cleared) => {
-      return this.storage.remove( 'password' );
-    });
+ 
+  
+  setCurrentDay(day) {
+    this.storage.set('currentDay', day);
   }
 
-  clearLoginInfo(){
-    this.authToken = '';
-    this.name = '';
-    this.storage.remove( 'loggedIn' );
-  }
-  
-  loginStatus() {
-    return this.storage.get( 'loggedIn' );
-  }
-  
-  rememberUsername() {
-    return this.storage.get( 'username' );
-  }
-
-  rememberPass() {
-    return this.storage.get( 'password' );
+  getCurrentDay() {
+    return this.storage.get('currentDay');
   }
 
 //   authLogin(email, password) {
@@ -79,12 +57,5 @@ export class CurrentDayService {
 //       return response;
 //     });
 //   }
-
-  updatePendingInvites(inviteToRemove) {
-    this.pendingInvites = this.pendingInvites.filter((invite: any) => {
-      return invite.id != inviteToRemove.id
-    });
-    this.events.publish('pendingInvites:updated');
-  }
 
 }
