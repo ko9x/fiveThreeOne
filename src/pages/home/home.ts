@@ -121,6 +121,10 @@ export class HomePage {
 
   }
 
+  setCurrentDay(day) {
+    this.currentDayService.setCurrentDay(day);
+  }
+
   getCurrentDay() {
     this.currentDayService.getCurrentDay().then((currentDay) => {
       if(currentDay) {
@@ -267,11 +271,15 @@ export class HomePage {
       if (data.week) {
         this.week = data.week.replace(/\s/g, '').toLowerCase();
         this.storage.set('currentWeek', data.week.replace(/\s/g, '').toLowerCase());
-        this.day = data.day.toLowerCase();
-        this.storage.set('currentDay', data.day.toLowerCase())
+        this.setCurrentDay(data.day.toLowerCase());
+        this.getCurrentDay();
+        // this.day = data.day.toLowerCase();
+        // this.storage.set('currentDay', data.day.toLowerCase())
       } else {
-        this.day = data.day.toLowerCase();
-        this.storage.set('currentDay', data.day.toLowerCase())
+        this.setCurrentDay(data.day.toLowerCase());
+        this.getCurrentDay();
+        // this.day = data.day.toLowerCase();
+        // this.storage.set('currentDay', data.day.toLowerCase())
       }
       this.displayWorkout();
     });
