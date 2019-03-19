@@ -1,21 +1,27 @@
 <ion-content>
     <ion-card class="top-card">
-        <ion-card-content center>
-            <h1>Select Day</h1>
-        </ion-card-content>
+      <ion-card-content center>
+          <h1>Select Day</h1>
+      </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-card-content *ngFor="let week of weeks" class="main-card">
-            <ion-card-header text-center>{{week}}</ion-card-header>
-              <ion-row>
-                <ion-col *ngFor="let day of days" text-center col-4>
-                  <button ion-button block (click)="daySelected(week,day)">{{day}}</button>
-                </ion-col>
-              </ion-row>
-        </ion-card-content>
-      </ion-card>
-      <button ion-button outline class="cancel-button" (click)="cancel()">Cancel</button>
-    <div class="buttons-container" text-center>
-        
-    </div>
+    <ion-card *ngIf="!tmt">
+      <ion-card-content *ngFor="let week of weeks" class="main-card">
+          <ion-card-header text-center>{{week}}</ion-card-header>
+            <ion-row>
+              <ion-col *ngFor="let day of days" text-center col-4>
+                <button ion-button block (click)="daySelected(day,week)">{{day}}</button>
+              </ion-col>
+            </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="tmt">
+      <ion-card-content class="main-card">
+            <ion-row>
+              <ion-col *ngFor="let day of days" text-center col-4>
+                <button ion-button block (click)="daySelected(day)">{{day}}</button>
+              </ion-col>
+            </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <button ion-button outline class="cancel-button" (click)="cancel()">Cancel</button>
 </ion-content>

@@ -9,18 +9,20 @@ export class SelectDayModal {
 
     public days = ["Monday", "Wednesday", "Friday"];
     public weeks = ["Week 1", "Week 2", "Week 3"];
+    public tmt: string
     
     constructor(
         public viewCtrl: ViewController, 
         public navParams: NavParams
         ) {
+            this.tmt = this.navParams.get('tmt')
         }
         
         cancel() {
             this.viewCtrl.dismiss();
         }
         
-        daySelected(week,day) {
+        daySelected(day,week) {
             this.viewCtrl.dismiss({
                 week: week,
                 day: day
