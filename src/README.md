@@ -2,8 +2,7 @@
 * Make a Commit after every step! 
 
 # What to do next
-* Finish figuring out how to display the TM test data in the home page
-    * need to lock out the calender during the TM and deload weeks. replace with an alert to exit TM or Dload
+* fix all the bugs associated with diplaying, starting and stopping the TM test week
 * Finish the options page and its associated modals 
     * decide how much more information to add to the information page
     * fill out the deload modal
@@ -18,6 +17,7 @@
 
 
 #Done
+* Finish figuring out how to display the TM test data in the home page
 * after each cycle I want the user to have a deload and TM test option
 * figure out how to dispaly the locally stored One Rep Max values
     * I made an array of objects with the properties I needed nested inside the objects
