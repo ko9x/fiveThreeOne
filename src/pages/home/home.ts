@@ -92,6 +92,7 @@ export class HomePage {
     this.retrieveStorageData();
     this.tmt = this.navParams.get('tmt');
     this.day = this.navParams.get('day');
+    this.storage.set('currentDay', this.day);
     
     if(this.tmt) {
       console.log('thisday', this.day); //@DEBUG
@@ -102,6 +103,7 @@ export class HomePage {
         this.tmtFriday = true;
         console.log('tmtFriday', this.tmtFriday); //@DEBUG
       }
+      console.log('right here', this.day); //@DEBUG
       this.currentCycle = this.tmt;
       setTimeout(() => {
         this.TMTRun();  }, 600);
@@ -144,11 +146,14 @@ export class HomePage {
     });
     this.storage.get('currentDay').then((data) => {
       this.day = data;
+      console.log('end retrieve', this.day); //@DEBUG
     });
+    
     
   }
 
   TMTRun(){
+    console.log('start tmtrun', this.day); //@DEBUG
     this.exercises.forEach((ex, index) => {
       let tm = "TM" + ex
       this.TMTCycle[0].TMTWeek[0].set1[index][ex] = Math.round((70/100) * this[tm]/5) * 5;
@@ -270,15 +275,18 @@ export class HomePage {
   }
 
   displayTMTWorkout() {
+    console.log('start tmt ', this.day); //@DEBUG
     let cycle = this.TMTCycle[0];
     console.log('cycle TMT', cycle.TMTWeek); //@DEBUG
     if(this.day === "monday") {
+      console.log('tmtworkout monday', this.day); //@DEBUG
       this.LBWorkoutTitle = "Squat";
       this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[1].Squat;
       this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[1].Squat;
       this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[1].Squat;
       this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[1].Squat;
     } else if(this.day === "wednesday") {
+      console.log('tmtworkout wednesday', this.day); //@DEBUG
       this.UBWorkoutTitle = "Shoulder Press";
       this.LBWorkoutTitle = "Dead Lift";
       this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[2].ShoulderPress;
@@ -290,6 +298,7 @@ export class HomePage {
       this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[3].DeadLift;
       this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[3].DeadLift;
     } else {
+      console.log('tmtworkout friday', this.day); //@DEBUG
       this.UBWorkoutTitle = "Bench";
       this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[0].Bench;
       this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[0].Bench;

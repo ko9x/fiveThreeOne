@@ -13,46 +13,88 @@
         <h1>{{week | addSpace}}</h1> <h2>{{day | titlecase}}</h2>
       </ion-card-content>
     </ion-card>
-    <ion-card *ngIf="!tmtMonday">
-      <ion-card-content class="exercise-one">
-        <h1 *ngIf="day === 'monday' || day === 'friday' ">Bench</h1>
-        <h1 *ngIf=" day === 'wednesday' ">Shoulder Press</h1>
-        <ion-row no-padding *ngFor="let set of UBSets">
-          <ion-col col-3 text-center >
-            {{set.name}}
-          </ion-col>
-          <ion-col *ngIf="weightPerSide">
-            {{set.weight | halfWeight}}
-          </ion-col>
-          <ion-col *ngIf="!weightPerSide">
-            {{set.weight}}
-          </ion-col>
-          <ion-col>
-            {{set.reps}}
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
-    <ion-card *ngIf="!tmtFriday">
-      <ion-card-content class="exercise-two">
-        <h1 *ngIf="day === 'monday' || day === 'friday' ">Squat</h1>
-        <h1 *ngIf="day === 'wednesday' ">Dead Lift</h1>
-        <ion-row no-padding *ngFor="let set of LBSets">
+    <div *ngIf="!tmt">
+      <ion-card>
+        <ion-card-content class="exercise-one">
+          <h1 *ngIf="day === 'monday' || day === 'friday' ">Bench</h1>
+          <h1 *ngIf=" day === 'wednesday' ">Shoulder Press</h1>
+          <ion-row no-padding *ngFor="let set of UBSets">
             <ion-col col-3 text-center >
               {{set.name}}
             </ion-col>
             <ion-col *ngIf="weightPerSide">
-                {{set.weight | halfWeight}}
+              {{set.weight | halfWeight}}
             </ion-col>
             <ion-col *ngIf="!weightPerSide">
-                {{set.weight}}
+              {{set.weight}}
             </ion-col>
             <ion-col>
               {{set.reps}}
             </ion-col>
           </ion-row>
-      </ion-card-content>
-    </ion-card>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content class="exercise-two">
+          <h1 *ngIf="day === 'monday' || day === 'friday' ">Squat</h1>
+          <h1 *ngIf="day === 'wednesday' ">Dead Lift</h1>
+          <ion-row no-padding *ngFor="let set of LBSets">
+              <ion-col col-3 text-center >
+                {{set.name}}
+              </ion-col>
+              <ion-col *ngIf="weightPerSide">
+                  {{set.weight | halfWeight}}
+              </ion-col>
+              <ion-col *ngIf="!weightPerSide">
+                  {{set.weight}}
+              </ion-col>
+              <ion-col>
+                {{set.reps}}
+              </ion-col>
+            </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngIf="tmt">
+      <ion-card>
+        <ion-card-content class="exercise-one">
+          <h1>TMT Bench</h1>
+          <ion-row no-padding *ngFor="let set of TMUBSets">
+            <ion-col col-3 text-center >
+              {{set.name}}
+            </ion-col>
+            <ion-col *ngIf="weightPerSide">
+              {{set.weight | halfWeight}}
+            </ion-col>
+            <ion-col *ngIf="!weightPerSide">
+              {{set.weight}}
+            </ion-col>
+            <ion-col>
+              {{set.reps}}
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content class="exercise-two">
+          <h1>Tmt Squat</h1>
+          <ion-row no-padding *ngFor="let set of TMLBSets">
+              <ion-col col-3 text-center >
+                {{set.name}}
+              </ion-col>
+              <ion-col *ngIf="weightPerSide">
+                  {{set.weight | halfWeight}}
+              </ion-col>
+              <ion-col *ngIf="!weightPerSide">
+                  {{set.weight}}
+              </ion-col>
+              <ion-col>
+                {{set.reps}}
+              </ion-col>
+            </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
     <div>
         <button 
           class="bottom-button" 
