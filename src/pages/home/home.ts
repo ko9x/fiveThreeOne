@@ -11,6 +11,8 @@ import { OptionsPage } from '../options/options';
 export class HomePage {
 
   public tmt: string;
+  public tmtMonday = false;
+  public tmtFriday = false;
   public day: string;
   public week: string;
   public currentCycle = 'Cycle 1';
@@ -89,13 +91,36 @@ export class HomePage {
 
     this.retrieveStorageData();
     this.tmt = this.navParams.get('tmt');
-
-    setTimeout(() => {
-      this.runIt();  }, 600);
-
+    this.day = this.navParams.get('day');
+    
+    if(this.tmt) {
+      console.log('thisday', this.day); //@DEBUG
+      if(this.day === "monday") {
+        this.tmtMonday = true;
+        console.log('tmtMonday', this.tmtMonday); //@DEBUG
+      } else if(this.day === "friday") {
+        this.tmtFriday = true;
+        console.log('tmtFriday', this.tmtFriday); //@DEBUG
+      }
+      this.currentCycle = this.tmt;
       setTimeout(() => {
-        this.displayWorkout();  }, 800);
+        this.TMTRun();  }, 600);
+  
+        setTimeout(() => {
+          this.displayTMTWorkout();  }, 800);
+    } else {
+      setTimeout(() => {
+        this.runIt();  }, 600);
+  
+        setTimeout(() => {
+          this.displayWorkout();  }, 800);
+    }
+
+    
+
+    
   }
+  
 
   retrieveStorageData() {
     this.storage.get('TMBench').then((data) =>{
@@ -127,7 +152,7 @@ export class HomePage {
     this.exercises.forEach((ex, index) => {
       let tm = "TM" + ex
       this.TMTCycle[0].TMTWeek[0].set1[index][ex] = Math.round((70/100) * this[tm]/5) * 5;
-      console.log('TMT', this.TMTCycle[0].TMTWeek[0].set1[index]); //@DEBUG
+      console.log('TMT', this.TMTCycle); //@DEBUG
     });
     this.exercises.forEach((ex, index) => {
       let tm = "TM" + ex
@@ -223,12 +248,16 @@ export class HomePage {
   }
 
   selectDayModal() {
-    let sdModal = this.modalCtrl.create( SelectDayModal );
+    let sdModal = this.modalCtrl.create( SelectDayModal, {tmt:this.tmt} );
 
     sdModal.onDidDismiss( data => {
-      if (data) {
+      console.log('select day', data); //@DEBUG
+      if (data.week) {
         this.week = data.week.replace(/\s/g, '').toLowerCase();
         this.storage.set('currentWeek', data.week.replace(/\s/g, '').toLowerCase());
+        this.day = data.day.toLowerCase();
+        this.storage.set('currentDay', data.day.toLowerCase())
+      } else {
         this.day = data.day.toLowerCase();
         this.storage.set('currentDay', data.day.toLowerCase())
       }
@@ -241,13 +270,31 @@ export class HomePage {
   }
 
   displayTMTWorkout() {
-    
+    let cycle = this.TMTCycle[0];
+    console.log('cycle TMT', cycle.TMTWeek); //@DEBUG
     if(this.day === "monday") {
-      let cycle = this.TMTCycle;
-      this.UBWorkoutTitle = "Squat";
-      cycle.forEach((set, index) => {
-        console.log('set', set.TMTWeek[index].set1[index].Bench); //@DEBUG
-      });
+      this.LBWorkoutTitle = "Squat";
+      this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[1].Squat;
+      this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[1].Squat;
+      this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[1].Squat;
+      this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[1].Squat;
+    } else if(this.day === "wednesday") {
+      this.UBWorkoutTitle = "Shoulder Press";
+      this.LBWorkoutTitle = "Dead Lift";
+      this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[2].ShoulderPress;
+      this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[2].ShoulderPress;
+      this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[2].ShoulderPress;
+      this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[2].ShoulderPress;
+      this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[3].DeadLift;
+      this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[3].DeadLift;
+      this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[3].DeadLift;
+      this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[3].DeadLift;
+    } else {
+      this.UBWorkoutTitle = "Bench";
+      this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[0].Bench;
+      this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[0].Bench;
+      this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[0].Bench;
+      this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[0].Bench;
     }
   }
 
