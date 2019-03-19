@@ -11,6 +11,7 @@ import { HomePage } from '../../pages/home/home';
 export class TMTestModal {
 
     public tmt = 'Training Max Test';
+    public day = 'monday'
     public currentCycle: string;
     public exampleSets = [
         {name: 'set 1', weight: "70%", reps: "1x5"},
@@ -55,7 +56,7 @@ export class TMTestModal {
     }
 
     beginTMTest() {
-        this.navCtrl.setRoot(HomePage, {tmt:this.tmt})
+        this.navCtrl.setRoot(HomePage, {tmt:this.tmt, day:this.day})
     }
 
 }
