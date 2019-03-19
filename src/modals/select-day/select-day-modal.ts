@@ -24,8 +24,8 @@ export class SelectDayModal {
         
         daySelected(day,week) {
             this.viewCtrl.dismiss({
-                week: week,
-                day: day
+                day: day,
+                week: week
             });
         }
         
