@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController, NavController, AlertController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../../pages/home/home';
+import { CurrentDayService } from '../../providers/current-day-service/current-day-service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class TMTestModal {
         public alertCtrl: AlertController,
         public viewCtrl: ViewController,
         public navCtrl: NavController,
-        public app: App
+        public app: App,
+        public currentDayService: CurrentDayService
     ) {
         
        
@@ -57,9 +59,14 @@ export class TMTestModal {
     }
 
     beginTMTest() {
+      this.setCurrentDay();
       this.viewCtrl.dismiss().then(() => {
-        this.app.getRootNav().setRoot(HomePage, {tmt:this.tmt, day:this.day});
+        this.app.getRootNav().setRoot(HomePage, {tmt:this.tmt});
     });
+    }
+
+    setCurrentDay() {
+      this.currentDayService.setCurrentDay(this.day);
     }
 
 }
