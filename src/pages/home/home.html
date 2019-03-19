@@ -56,9 +56,10 @@
       </ion-card>
     </div>
     <div *ngIf="tmt">
-      <ion-card>
+      <ion-card *ngIf="day !== 'monday'">
         <ion-card-content class="exercise-one">
-          <h1>TMT Bench</h1>
+          <h1 *ngIf="day === 'wednesday'">Shoulder Press</h1>
+          <h1 *ngIf="day === 'friday'">Bench</h1>
           <ion-row no-padding *ngFor="let set of TMUBSets">
             <ion-col col-3 text-center >
               {{set.name}}
@@ -75,9 +76,10 @@
           </ion-row>
         </ion-card-content>
       </ion-card>
-      <ion-card>
+      <ion-card *ngIf="day !== 'friday'">
         <ion-card-content class="exercise-two">
-          <h1>Tmt Squat</h1>
+          <h1 *ngIf="day === 'monday'">Squat</h1>
+          <h1 *ngIf="day === 'wednesday'">Dead Lift</h1>
           <ion-row no-padding *ngFor="let set of TMLBSets">
               <ion-col col-3 text-center >
                 {{set.name}}

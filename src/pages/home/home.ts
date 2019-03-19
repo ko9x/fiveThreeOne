@@ -96,14 +96,6 @@ export class HomePage {
     this.getCurrentDay();
     
     if(this.tmt) {
-      console.log('thisday', this.day); //@DEBUG
-      if(this.day === "monday") {
-        this.tmtMonday = true;
-        console.log('tmtMonday', this.tmtMonday); //@DEBUG
-      } else if(this.day === "friday") {
-        this.tmtFriday = true;
-        console.log('tmtFriday', this.tmtFriday); //@DEBUG
-      }
       console.log('right here', this.day); //@DEBUG
       this.currentCycle = this.tmt;
       setTimeout(() => {
@@ -264,22 +256,19 @@ export class HomePage {
   }
 
   selectDayModal() {
-    let sdModal = this.modalCtrl.create( SelectDayModal, {tmt:this.tmt} );
+    let sdModal = this.modalCtrl.create( SelectDayModal, {tmt:this.tmt, day:this.day} );
 
     sdModal.onDidDismiss( data => {
       console.log('select day', data); //@DEBUG
       if (data.week) {
         this.week = data.week.replace(/\s/g, '').toLowerCase();
         this.storage.set('currentWeek', data.week.replace(/\s/g, '').toLowerCase());
-        this.setCurrentDay(data.day.toLowerCase());
-        this.getCurrentDay();
-        // this.day = data.day.toLowerCase();
-        // this.storage.set('currentDay', data.day.toLowerCase())
+        this.day = data.day.toLowerCase();
+        this.storage.set('currentDay', data.day.toLowerCase())
       } else {
-        this.setCurrentDay(data.day.toLowerCase());
-        this.getCurrentDay();
-        // this.day = data.day.toLowerCase();
-        // this.storage.set('currentDay', data.day.toLowerCase())
+        this.storage.set('currentWeek', 'TM Test')
+        this.day = data.day.toLowerCase();
+        this.storage.set('currentDay', data.day.toLowerCase())
       }
       this.displayWorkout();
     });
@@ -296,10 +285,10 @@ export class HomePage {
     if(this.day === "monday") {
       console.log('tmtworkout monday', this.day); //@DEBUG
       this.LBWorkoutTitle = "Squat";
-      this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[1].Squat;
-      this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[1].Squat;
-      this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[1].Squat;
-      this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[1].Squat;
+      this.TMLBSets[0].weight = cycle.TMTWeek[0].set1[1].Squat;
+      this.TMLBSets[1].weight = cycle.TMTWeek[1].set2[1].Squat;
+      this.TMLBSets[2].weight = cycle.TMTWeek[2].set3[1].Squat;
+      this.TMLBSets[3].weight = cycle.TMTWeek[3].set4[1].Squat;
     } else if(this.day === "wednesday") {
       console.log('tmtworkout wednesday', this.day); //@DEBUG
       this.UBWorkoutTitle = "Shoulder Press";
@@ -308,10 +297,10 @@ export class HomePage {
       this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[2].ShoulderPress;
       this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[2].ShoulderPress;
       this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[2].ShoulderPress;
-      this.TMUBSets[0].weight = cycle.TMTWeek[0].set1[3].DeadLift;
-      this.TMUBSets[1].weight = cycle.TMTWeek[1].set2[3].DeadLift;
-      this.TMUBSets[2].weight = cycle.TMTWeek[2].set3[3].DeadLift;
-      this.TMUBSets[3].weight = cycle.TMTWeek[3].set4[3].DeadLift;
+      this.TMLBSets[0].weight = cycle.TMTWeek[0].set1[3].DeadLift;
+      this.TMLBSets[1].weight = cycle.TMTWeek[1].set2[3].DeadLift;
+      this.TMLBSets[2].weight = cycle.TMTWeek[2].set3[3].DeadLift;
+      this.TMLBSets[3].weight = cycle.TMTWeek[3].set4[3].DeadLift;
     } else {
       console.log('tmtworkout friday', this.day); //@DEBUG
       this.UBWorkoutTitle = "Bench";
