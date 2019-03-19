@@ -17,6 +17,8 @@ import { HelpModal } from '../modals/help/help-modal';
 import { TMTestModal } from '../modals/tm-test/tm-test-modal';
 import { DeloadModal } from '../modals/deload/deload-modal';
 
+import { CurrentDayService } from '../providers/current-day-service/current-day-service';
+
 import { AddSpacePipe } from '../pipes/add-space/add-space';
 import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
 
@@ -58,7 +60,8 @@ import { HalfWeightPipe } from '../pipes/half-weight/half-weight';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AddSpacePipe,
-    HalfWeightPipe
+    HalfWeightPipe,
+    CurrentDayService
   ]
 })
 export class AppModule {}
